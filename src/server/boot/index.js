@@ -7,7 +7,7 @@ import PerguntaSchema from '@schemas/pergunta'
 import Perguntas from '@collections/perguntas'
 import ProdutoSchema from '@schemas/produto'
 import Produtos from '@collections/produtos'
-import PromocaoSchema from '@schemas/promocoes'
+import PromocaoSchema from '@schemas/promocao'
 import Promocoes from '@collections/promocoes'
 import QuestionarioSchema from '@schemas/questionario'
 import Questionarios from '@collections/questionarios'
@@ -18,10 +18,10 @@ import Restaurantes from '@collections/restaurantes'
 import VoucherSchema from '@schemas/voucher'
 import Vouchers from '@collections/vouchers'
 
-const ROLES = ['admin', 'editor', 'researcher', 'viewer'];
-const ADMIN_EMAIL = 'admin@admin.com';
-const ADMIN_PASSWORD = 'q1w2e3';
-const ADMIN_ROLE = 'admin';
+const ROLES = ['admin', 'editor', 'researcher', 'viewer']
+const ADMIN_EMAIL = 'admin@admin.com'
+const ADMIN_PASSWORD = 'q1w2e3'
+const ADMIN_ROLE = 'admin'
 
 Cupons.attachSchema(CupomSchema)
 Perguntas.attachSchema(PerguntaSchema)
@@ -41,21 +41,21 @@ Meteor.startup(() => {
       const userId = Accounts.createUser({
         email: ADMIN_EMAIL,
         password: ADMIN_PASSWORD,
-      });
-      Roles.addUsersToRoles(userId, ADMIN_ROLE);
+      })
+      Roles.addUsersToRoles(userId, ADMIN_ROLE)
     }
   }
 
   // Seed Roles
   Meteor.roles.remove({
     name: { $nin: ROLES },
-  });
+  })
   ROLES.forEach((role, index) => {
     Meteor.roles.upsert({
       name: role,
     }, {
       name: role,
       hierarchy: index,
-    });
-  });
+    })
+  })
 })

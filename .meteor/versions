@@ -52,6 +52,7 @@ launch-screen@1.0.12
 livedata@1.0.18
 localstorage@1.0.11
 logging@1.1.15_1
+mdg:validated-method@1.1.0
 mdg:validation-error@0.5.1
 meteor@1.2.17_1
 meteor-base@1.0.4
@@ -100,6 +101,7 @@ reactive-dict@1.1.8
 reactive-var@1.0.10
 reload@1.1.10
 retry@1.0.8
+reywood:publish-composite@1.4.2
 routepolicy@1.0.11
 service-configuration@1.0.10
 session@1.1.6

@@ -1,4 +1,5 @@
 import { ServiceConfiguration } from 'meteor/service-configuration'
+import { Meteor } from 'meteor/meteor'
 
 ServiceConfiguration.configurations.upsert(
   { service: 'facebook' },
@@ -6,18 +7,6 @@ ServiceConfiguration.configurations.upsert(
     $set: {
       appId: Meteor.settings.services.facebook.appId,
       secret: Meteor.settings.services.facebook.secret,
-      loginStyle: 'popup',
     },
-  },
-);
-
-ServiceConfiguration.configurations.upsert(
-  { service: 'linkedin' },
-  {
-    $set: {
-      clientId: Meteor.settings.services.linkedin.clientId,
-      secret: Meteor.settings.services.linkedin.secret,
-      loginStyle: 'popup',
-    },
-  },
-);
+  }
+)

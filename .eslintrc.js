@@ -18,7 +18,7 @@ const config = {
     "jsx-a11y/img-has-alt": 0, // allow no alt attribute on images
     "global-require": 0,
     "no-param-reassign": 1, // allow to change input parameters
-    "semi": 0,
+    "semi": ["error", "never"],
     "no-case-declarations": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/sort-comp": 0,

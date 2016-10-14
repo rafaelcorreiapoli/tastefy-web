@@ -2,7 +2,6 @@ import searchHOC from '@components/SearchHOC'
 import Departamentos from '@components/Departamentos'
 import { Meteor } from 'meteor/meteor'
 import { composeWithTracker } from 'react-komposer'
-import DepartamentosCollection from '@collections/departamentos'
 import { Counts } from 'meteor/tmeasday:publish-counts'
 import convertSortStringToObject from '@utils/convert_sort_object'
 import convertFormObjectToFilterObject, { RANGE } from '@utils/convert_filter_object'
@@ -44,7 +43,7 @@ const composer = (props, onData) => {
       sort: sortObject,
     }
     onData(null, {
-      results: DepartamentosCollection.find(selector, options).fetch(),
+      results: [],
       totalResults,
       loading: false,
     })

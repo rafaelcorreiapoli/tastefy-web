@@ -1,25 +1,23 @@
-import { Meteor } from 'meteor/meteor';
-import { Cupons } from '../cupons';
-import { Restaurantes } from '/imports/api/restaurantes/restaurantes';
-import { Promocoes } from '/imports/api/promocoes/promocoes';
-import { Produtos } from '/imports/api/produtos/produtos';
-import { Questionarios } from '/imports/api/questionarios/questionarios';
-import { Perguntas } from '/imports/api/perguntas/perguntas';
-import { check } from 'meteor/check';
+import { Meteor } from 'meteor/meteor'
+import { check } from 'meteor/check'
+import { Cupons } from '@collections/cupons'
+import Restaurantes from '@collections/restaurantes'
+import Promocoes from '@collections/promocoes'
+import Produtos from '@collections/produtos'
+import Questionarios from '@collections/questionarios'
+import Perguntas from '@collections/perguntas'
 
-Meteor.publish('cupons', () => {
-  return Cupons.find();
-});
+Meteor.publish('cupons', () => Cupons.find())
 
 Meteor.publishComposite('cupons.prePesquisa', function ({ cupomId }) {
-  check(cupomId, String);
+  check(cupomId, String)
   const userId = this.userId
   return {
     find() {
       return Cupons.find({
         _id: cupomId,
         ownerId: userId,
-      });
+      })
     },
     children: [
       {
@@ -53,18 +51,18 @@ Meteor.publishComposite('cupons.prePesquisa', function ({ cupomId }) {
         ],
       },
     ],
-  };
-});
+  }
+})
 
 Meteor.publishComposite('cupons.pesquisa', function ({ cupomId }) {
-  check(cupomId, String);
+  check(cupomId, String)
   const userId = this.userId
   return {
     find() {
       return Cupons.find({
         _id: cupomId,
         ownerId: userId,
-      });
+      })
     },
     children: [
       {
@@ -82,19 +80,19 @@ Meteor.publishComposite('cupons.pesquisa', function ({ cupomId }) {
         }],
       },
     ],
-  };
-});
+  }
+})
 
 Meteor.publishComposite('cupons.porRestaurante', ({ restauranteId }) => {
-  check(restauranteId, String);
+  check(restauranteId, String)
   return {
     find() {
       return Cupons.find({
         restauranteId,
-      });
+      })
     },
-  };
-});
+  }
+})
 
 Meteor.publishComposite('cupons.meusCupons', function () {
   const userId = this.userId
@@ -102,7 +100,7 @@ Meteor.publishComposite('cupons.meusCupons', function () {
     find() {
       return Cupons.find({
         ownerId: userId,
-      });
+      })
     },
     children: [{
       find(cupom) {
@@ -116,8 +114,8 @@ Meteor.publishComposite('cupons.meusCupons', function () {
         })
       },
     }],
-  };
-});
+  }
+})
 
 Meteor.publishComposite('cupons.cuponsGerados', function () {
   const userId = this.userId
@@ -125,23 +123,23 @@ Meteor.publishComposite('cupons.cuponsGerados', function () {
     find() {
       return Cupons.find({
         geradoPor: userId,
-      });
+      })
     },
-  };
-});
+  }
+})
 
 
 Meteor.publishComposite('cupons.single', ({ cupomId }) => {
-  check(cupomId, String);
+  check(cupomId, String)
   return {
     find() {
       return Cupons.find({
         _id: cupomId,
-      });
+      })
     },
     children: [{
       find(cupom) {
-        const { restauranteId } = cupom;
+        const { restauranteId } = cupom
         return Restaurantes.find({
           _id: restauranteId,
         }, {
@@ -149,8 +147,8 @@ Meteor.publishComposite('cupons.single', ({ cupomId }) => {
             nome: 1,
             logoUrl: 1,
           },
-        });
+        })
       },
     }],
-  };
-});
+  }
+})

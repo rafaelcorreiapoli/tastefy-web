@@ -1,11 +1,11 @@
-import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { TIPOS } from '@schemas/perguntas';
-import Respostas from '@collections/respostas';
-import Perguntas from '@collections/perguntas';
-import Cupons from '@collections/cupons';
-import { Random } from 'meteor/random';
-import Promocoes from '@collections/Promocoes';
-import Vouchers from '@collections/vouchers';
+import { ValidatedMethod } from 'meteor/mdg:validated-method'
+import { TIPOS } from '@schemas/pergunta'
+import Respostas from '@collections/respostas'
+import Perguntas from '@collections/perguntas'
+import Cupons from '@collections/cupons'
+import { Random } from 'meteor/random'
+import Promocoes from '@collections/promocoes'
+import Vouchers from '@collections/vouchers'
 import { Match, check } from 'meteor/check'
 
 export const processarRespostas = new ValidatedMethod({
@@ -14,12 +14,12 @@ export const processarRespostas = new ValidatedMethod({
     check(respostas, [{
       perguntaId: String,
       val: Match.OneOf(Number, [Number], String, [String], Boolean, [Boolean]),
-    }]);
-    check(cupomId, String);
+    }])
+    check(cupomId, String)
   },
   run({ respostas, cupomId }) {
-    const userId = Meteor.userId();
-    const data = new Date();
+    const userId = Meteor.userId()
+    const data = new Date()
 
     // Checar cupom
     const cupom = Cupons.findOne({
@@ -45,54 +45,54 @@ export const processarRespostas = new ValidatedMethod({
       fields: {
         _id: 1,
       },
-    }).fetch();
+    }).fetch()
 
     respostasNecessarias.forEach((respostaNecessaria) => {
-      const temResposta = respostas.find(r => r.perguntaId === respostaNecessaria._id);
+      const temResposta = respostas.find(r => r.perguntaId === respostaNecessaria._id)
       if (!temResposta) {
-        throw new Meteor.Error('respostas.processarRespostas.respostasInsuficientes');
+        throw new Meteor.Error('respostas.processarRespostas.respostasInsuficientes')
       }
-    });
+    })
 
     respostas.forEach((resposta) => {
-      const { perguntaId, val } = resposta;
+      const { perguntaId, val } = resposta
 
       //  Checar se a pergunta realmente existe
       const pergunta = Perguntas.findOne({
         _id: perguntaId,
         questionarioId,
-      });
+      })
 
       if (!pergunta) {
-        throw new Meteor.Error('respostas.processarRespostas.perguntaNaoEncontrada');
+        throw new Meteor.Error('respostas.processarRespostas.perguntaNaoEncontrada')
       }
 
-      const { tipo } = pergunta;
+      const { tipo } = pergunta
       //  Transformar val em conteudo de resposta
-      let conteudo;
+      let conteudo
       switch (tipo) {
         case (TIPOS.STRING):
           conteudo = {
             string: val,
-          };
-          break;
+          }
+          break
         case (TIPOS.ARRAY):
           conteudo = {
             array: val,
-          };
-          break;
+          }
+          break
         case (TIPOS.NUMBER):
           conteudo = {
             number: val,
-          };
-          break;
+          }
+          break
         case (TIPOS.DATE):
           conteudo = {
             date: val,
-          };
-          break;
+          }
+          break
         default:
-          throw new Meteor.Error('respostas.processarRespostas.tipoDesconhecido');
+          throw new Meteor.Error('respostas.processarRespostas.tipoDesconhecido')
       }
 
       //  Gerar objeto de resposta
@@ -105,13 +105,13 @@ export const processarRespostas = new ValidatedMethod({
         conteudo,
         data,
         promocaoId,
-      };
+      }
 
       //  Guardar no banco de dados
-      Respostas.insert(obj);
-    });
+      Respostas.insert(obj)
+    })
 
-    const { _id } = cupom;
+    const { _id } = cupom
     Cupons.update({
       _id,
     }, {
@@ -119,11 +119,11 @@ export const processarRespostas = new ValidatedMethod({
         utilizado: true,
         utilizadoEm: data,
       },
-    });
+    })
 
 
     const promocao = Promocoes.findOne(promocaoId)
-    const token = Random.hexString(10);
+    const token = Random.hexString(10)
 
     Vouchers.insert({
       restauranteId,
@@ -136,4 +136,4 @@ export const processarRespostas = new ValidatedMethod({
       token,
     })
   },
-});
+})

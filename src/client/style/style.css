@@ -1,0 +1,26 @@
+html { font-family: 'Roboto', sans-serif; }
+
+.s-alert-box {
+  z-index: 999999 !important
+}
+a {
+  text-decoration: none
+}
+body {
+  margin: 0px;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+body {
+  background-color: #F4F4F6
+}
+
+h1,h2,h3,h4,h5 {
+  font-weight: 200;
+}
+
+.display-block {
+  display: block;
+}

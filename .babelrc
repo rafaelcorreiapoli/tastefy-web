@@ -1,0 +1,27 @@
+{
+  "presets": [
+    "es2015",
+    "stage-0",
+    "react"
+  ],
+  "plugins": [
+    ["module-resolver", {
+      "root": ["src"],
+      "alias": {
+        "@lib": "lib",
+        "@collections": "lib/collections",
+        "@resources": "lib/resources",
+        "@ducks": "client/ducks",
+        "@components": "client/components",
+        "@containers": "client/containers",
+        "@pages": "client/pages",
+        "@helpers": "client/helpers",
+        "@selectors": "client/selectors",
+        "@config": "client/config",
+        "@utils": "client/utils",
+        "@helpers": "client/helpers",
+        "@schemas": "lib/schemas"
+      }
+    }]
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "root": "src",
+  "devServer": {
+    "host": "localhost"
+  },
+  "styles": {
+    "sourceMap": true
+  },
+  "css": {
+    "modules": true
+  }
+}

@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import { check } from 'meteor/check'
-import { Cupons } from '@collections/cupons'
+import Cupons from '@collections/cupons'
 import Restaurantes from '@collections/restaurantes'
 import Promocoes from '@collections/promocoes'
 import Produtos from '@collections/produtos'

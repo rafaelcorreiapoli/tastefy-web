@@ -8,60 +8,57 @@ Meteor.publish('vouchers', () => {
   return Vouchers.find()
 })
 
-
-export default function () {
-  Meteor.publishComposite('vouchers.meusVouchers', function () {
-    const userId = this.userId
-    return {
-      find() {
-        return Vouchers.find({
-          ownerId: userId,
-        })
+Meteor.publishComposite('vouchers.meusVouchers', function () {
+  const userId = this.userId
+  return {
+    find() {
+      return Vouchers.find({
+        ownerId: userId,
+      })
+    },
+    children: [{
+      find(voucher) {
+        const { restauranteId } = voucher
+        return Restaurantes.find(restauranteId)
       },
-      children: [{
-        find(voucher) {
-          const { restauranteId } = voucher
-          return Restaurantes.find(restauranteId)
-        },
-      }, {
-        find(voucher) {
-          const { promocaoId } = voucher
-          return Promocoes.find(promocaoId)
-        },
-      }],
-    }
-  })
-
-  Meteor.publishComposite('vouchers.vouchersValidados', function () {
-    const userId = this.userId
-    return {
-      find() {
-        return Vouchers.find({
-          validadoPor: userId,
-        })
+    }, {
+      find(voucher) {
+        const { promocaoId } = voucher
+        return Promocoes.find(promocaoId)
       },
-      children: [{
-        find(voucher) {
-          const { produtoSelecionado } = voucher
-          return Produtos.find(produtoSelecionado)
-        },
-      }, {
-        find(voucher) {
-          const { ownerId } = voucher
-          return Meteor.users.find(ownerId)
-        },
-      }],
-    }
-  })
+    }],
+  }
+})
 
-  Meteor.publishComposite('vouchers.single', function ({ voucherId }) {
-    const userId = this.userId
-    return {
-      find() {
-        return Vouchers.find({
-          _id: voucherId,
-        })
+Meteor.publishComposite('vouchers.vouchersValidados', function () {
+  const userId = this.userId
+  return {
+    find() {
+      return Vouchers.find({
+        validadoPor: userId,
+      })
+    },
+    children: [{
+      find(voucher) {
+        const { produtoSelecionado } = voucher
+        return Produtos.find(produtoSelecionado)
       },
-    }
-  })
-}
+    }, {
+      find(voucher) {
+        const { ownerId } = voucher
+        return Meteor.users.find(ownerId)
+      },
+    }],
+  }
+})
+
+Meteor.publishComposite('vouchers.single', function ({ voucherId }) {
+  const userId = this.userId
+  return {
+    find() {
+      return Vouchers.find({
+        _id: voucherId,
+      })
+    },
+  }
+})

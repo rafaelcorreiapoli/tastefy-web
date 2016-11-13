@@ -31,24 +31,12 @@ class Drawer extends React.Component {
       >
         <MenuItem
           leftIcon={<DepartamentosIcon />}
-          onClick={() => go('/departamentos')}
+          onClick={() => go('/restaurantes')}
         >
-          Departamentos
+          Restaurantes
         </MenuItem>
         <MenuItem
           leftIcon={<SetoresIcon />}
-          onClick={() => go('/setores')}
-        >
-          Setores
-        </MenuItem>
-        <MenuItem
-          leftIcon={<FuncionariosIcon />}
-          onClick={() => go('/funcionarios')}
-        >
-          Funcionários
-        </MenuItem>
-        <MenuItem
-          leftIcon={<Users />}
           onClick={() => go('/usuarios')}
         >
           Usuários

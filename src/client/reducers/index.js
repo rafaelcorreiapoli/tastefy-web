@@ -10,6 +10,7 @@ import match from '@ducks/match'
 import autenticarPonto from '@ducks/autenticarPonto'
 import uploader from '@ducks/uploader'
 import search from '@ducks/search'
+import dashboard from 'ducks-dashboard'
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   autenticarPonto,
   uploader,
   search,
+  dashboard,
 });
 
 export default rootReducer

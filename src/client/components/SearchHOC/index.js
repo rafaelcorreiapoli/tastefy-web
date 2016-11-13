@@ -1,3 +1,4 @@
+import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
@@ -13,10 +14,28 @@ import {
   getFilter,
   getSort,
   newSearch,
-} from '@ducks/search'
+  registerSearch,
+} from 'ducks-dashboard'
 
 
 export default (ComposedComponent, { searchId, searchFn }) => {
+  class HOCComponent extends React.Component {
+    static propTypes = {
+      registerSearch: PropTypes.func,
+    }
+
+    constructor(props) {
+      super(props)
+      props.registerSearch()
+    }
+
+    render() {
+      return (
+        <ComposedComponent {...this.props} />
+      )
+    }
+  }
+
   const mapStateToProps = state => ({
     page: getPage(state, searchId),
     searchText: getSearchText(state, searchId),
@@ -25,10 +44,13 @@ export default (ComposedComponent, { searchId, searchFn }) => {
     pageSize: getPageSize(state, searchId),
   })
 
-  const mapDispatchToProps = dispatch => {
+  const mapDispatchToProps = (dispatch) => {
     const debouncedDispatch = _.debounce(dispatch, 1000)
 
     return {
+      registerSearch() {
+        dispatch(registerSearch(searchId))
+      },
       setSearchText(searchText) {
         dispatch(setSearchText(searchId, searchText))
         debouncedDispatch(newSearch(searchId, searchFn))
@@ -48,7 +70,7 @@ export default (ComposedComponent, { searchId, searchFn }) => {
       setPage(page) {
         dispatch(setPage(searchId, page))
         debouncedDispatch(newSearch(searchId, searchFn))
-      }
+      },
     }
   }
 
@@ -56,5 +78,5 @@ export default (ComposedComponent, { searchId, searchFn }) => {
   return connect(
     mapStateToProps,
     mapDispatchToProps
-  )(ComposedComponent)
+  )(HOCComponent)
 }

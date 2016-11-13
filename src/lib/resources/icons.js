@@ -5,7 +5,7 @@ export Twitter from 'react-icons/lib/fa/twitter';
 export Instagram from 'react-icons/lib/fa/instagram';
 export Linkedin from 'react-icons/lib/fa/linkedin';
 export Profile from 'material-ui/svg-icons/social/person'
-export Users from 'material-ui/svg-icons/social/people-outline'
+
 export Add from 'material-ui/svg-icons/content/add-circle-outline';
 export Logout from 'material-ui/svg-icons/action/exit-to-app'
 export Help from 'material-ui/svg-icons/action/help-outline'
@@ -20,6 +20,7 @@ export FilterIcon from 'material-ui/svg-icons/content/filter-list'
 export SortIcon from 'material-ui/svg-icons/content/sort'
 export SetoresIcon from 'material-ui/svg-icons/editor/pie-chart-outlined'
 export DepartamentosIcon from 'material-ui/svg-icons/social/domain'
+
 export FuncionariosIcon from 'material-ui/svg-icons/action/work'
 export Check from 'material-ui/svg-icons/navigation/check'
 export Close from 'material-ui/svg-icons/navigation/close'
@@ -32,3 +33,7 @@ export Replay from 'material-ui/svg-icons/av/replay'
 export Error from 'material-ui/svg-icons/alert/error'
 export Cancel from 'material-ui/svg-icons/navigation/cancel'
 export Remove from 'material-ui/svg-icons/action/delete'
+
+
+export UsersIcon from 'material-ui/svg-icons/social/people-outline'
+export RestaurantesIcon from 'material-ui/svg-icons/social/domain'

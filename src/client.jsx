@@ -23,7 +23,7 @@ Meteor.startup(() => {
   // Package['msavin:mongol'].Mongol.showCollection('setores')
   // Package['msavin:mongol'].Mongol.showCollection('funcionarios')
   // Package['msavin:mongol'].Mongol.showCollection('pontos')
-  // Package['msavin:mongol'].Mongol.showCollection('faltas')
+  Package['msavin:mongol'].Mongol.showCollection('restaurantes')
 
   ReactDOM.render(
     <Root />,

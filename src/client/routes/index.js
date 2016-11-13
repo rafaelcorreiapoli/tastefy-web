@@ -1,16 +1,10 @@
 import React, { PropTypes } from 'react'
 import { Router, IndexRoute, Route, browserHistory, IndexRedirect } from 'react-router'
 import { syncHistoryWithStore, replace } from 'react-router-redux'
-import AppContainer from '@containers/AppContainer';
+import AppContainer from '@containers/AppContainer'
 import AuthenticatedLayout from '@components/AuthenticatedLayout'
-import FaltasAddPage from '@pages/FaltasAddPage'
-import DepartamentosPage from '@pages/DepartamentosPage'
-import DepartamentosAddPage from '@pages/DepartamentosAddPage'
-import SetoresPage from '@pages/SetoresPage'
-import SetoresAddPage from '@pages/SetoresAddPage'
-import FuncionariosPage from '@pages/FuncionariosPage'
-import FuncionariosAddPage from '@pages/FuncionariosAddPage'
-import UsuariosPage from '@pages/UsuariosPage'
+import RestaurantesPage from '@pages/RestaurantesPage'
+import UsersPage from '@pages/UsersPage'
 import LoginScreen from '@pages/LoginScreen'
 import RegistrarPontoPage from '@pages/RegistrarPontoPage'
 import WelcomePage from '@pages/WelcomePage'
@@ -21,7 +15,7 @@ import { clearLogoutRequest } from '@ducks/login'
 import { Meteor } from 'meteor/meteor'
 import store from '../store'
 const Loading = ({
-  children
+  children,
 }) => {
   return (
     <div>
@@ -41,7 +35,7 @@ const userIsAuthenticated = UserAuthWrapper({
     if (state.login.get('logoutRequest')) {
       delete newLoc.query.redirect
     }
-    dispatch(clearLogoutRequest());
+    dispatch(clearLogoutRequest())
     dispatch(replace(newLoc))
   },
 })
@@ -51,24 +45,10 @@ const Routes = () => (
     <Route path="/" component={AppContainer}>
       <Route component={AuthenticatedLayout}>
         <IndexRoute component={WelcomePage} />
-        <Route path="departamentos">
-          <IndexRoute component={DepartamentosPage} />
-          <Route path="add" component={DepartamentosAddPage} />
+        <Route path="restaurantes">
+          <IndexRoute component={RestaurantesPage} />
         </Route>
-        <Route path="setores">
-          <IndexRoute component={SetoresPage} />
-          <Route path="add" component={SetoresAddPage} />
-        </Route>
-        <Route path="funcionarios">
-          <IndexRoute component={FuncionariosPage} />
-          <Route path="add" component={FuncionariosAddPage} />
-        </Route>
-        <Route path="faltas">
-          <Route path="add" component={FaltasAddPage} />
-        </Route>
-        <Route path="usuarios" component={UsuariosPage} />
-        <Route path="registrar-ponto" component={RegistrarPontoPage} />
-        <Route path="upload" component={UploaderPage} />
+        <Route path="usuarios" component={UsersPage} />
       </Route>
     </Route>
   </Router>

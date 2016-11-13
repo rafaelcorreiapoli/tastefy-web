@@ -3,7 +3,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid/lib/index'
 import FilterDepartamentos from '@components/FilterDepartamentos'
 import SortDepartamentos from '@components/SortDepartamentos'
 import DepartamentoCard from '@components/DepartamentoCard'
-import { CSSGrid } from 'react-stonecutter';
+import { CSSGrid, measureItems } from 'react-stonecutter';
 import UltimatePaginationMaterialUi from 'react-ultimate-pagination-material-ui'
 import makeResponsive from '@helpers/responsive'
 import FilterWrapper from '@components/FilterWrapper'
@@ -39,7 +39,7 @@ const styles = {
   },
 }
 
-const StonecutterGrid = makeResponsive(CSSGrid, {
+const ResultsGrid = makeResponsive(measureItems(CSSGrid, { measureImages: true }), {
   minPadding: 10,
   columnWidth: 250,
   gutterWidth: 5,
@@ -109,9 +109,8 @@ class Departamentos extends React.Component {
                 :
                   results.length ?
                     <div>
-                      <StonecutterGrid
+                      <ResultsGrid
                         gutterHeight={20}
-                        itemHeight={284}
                         duration={200}
                         easing="ease-out"
                         springConfig={{ stiffness: 170, damping: 26 }}
@@ -126,7 +125,7 @@ class Departamentos extends React.Component {
                             />
                           )
                         }
-                      </StonecutterGrid>
+                      </ResultsGrid>
                       <div style={{ textAlign: 'center', marginTop: 20 }}>
                         <UltimatePaginationMaterialUi
                           currentPage={page + 1}

@@ -25,7 +25,7 @@ class AppBar extends React.Component {
         titleStyle={{
           textAlign: 'center',
         }}
-        title="BOUNTIFY - ADMIN"
+        title="TASTEFY - ADMIN"
         style={{ color: 'black' }}
         onLeftIconButtonTouchTap={onClickToggleMenu}
         iconElementRight={

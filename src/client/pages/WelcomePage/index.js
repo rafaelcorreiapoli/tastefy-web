@@ -1,17 +1,19 @@
 import React, { PropTypes } from 'react'
 import Calendar from '@components/Calendar'
 import Webcam from 'react-webcam';
+import MontarQuestionario from '@components/MontarQuestionario'
+import { Grid, Row, Col } from 'react-flexbox-grid'
 
 class WelcomePage extends React.Component {
   render() {
     return (
-      <div>
-        <Calendar
-          month={9}
-          year={2016}
-          renderDay={date => <div>ok</div>}
-        />
-      </div>
+      <Grid>
+        <Row>
+          <Col xs={12}>
+            <MontarQuestionario />
+          </Col>
+        </Row>
+      </Grid>
     )
   }
 }

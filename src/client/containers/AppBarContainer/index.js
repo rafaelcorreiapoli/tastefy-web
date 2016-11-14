@@ -16,13 +16,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => ({
   onClickToggleMenu: () => dispatch(setDrawerOpen(true)),
-  onClickProfileLink: () => dispatch(push('/profile')),
-  onClickHelpLink: () => dispatch(push('/help')),
+  go(where) {
+    dispatch(setDrawerOpen(false))
+    dispatch(push(where))
+  },
   onClickLogoutLink: () => dispatch(logout()),
-  onClickAddDepartamento: () => dispatch(push('/departamentos/add')),
-  onClickAddSetor: () => dispatch(push('/setores/add')),
-  onClickAddFuncionario: () => dispatch(push('/funcionarios/add')),
-  onClickAddFalta: () => dispatch(push('/faltas/add')),
 })
 
 const composer = (props, onData) => {

@@ -31,7 +31,7 @@ class FilterWrapper extends React.Component {
     return (
       <Paper style={Object.assign({}, styles.paperStyle, style)} {...props}>
         <div style={{ display: 'flex', alignItems: 'center', paddingTop: 10 }}>
-          {React.cloneElement(icon, {
+          {icon && React.cloneElement(icon, {
             style: { marginRight: 10 },
           })}
           <h3 style={styles.title}>{title}</h3>

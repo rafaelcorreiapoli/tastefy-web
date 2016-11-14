@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'
 import {
   AppBar as MUIAppBar,
   IconButton,
@@ -11,24 +11,14 @@ import { Menu, Add, Logout, Help, Profile } from '@resources/icons'
 class AppBar extends React.Component {
   static propTypes = {
     onClickToggleMenu: PropTypes.func,
-    onClickProfileLink: PropTypes.func,
-    onClickHelpLink: PropTypes.func,
     onClickLogoutLink: PropTypes.func,
-    onClickAddDepartamento: PropTypes.func,
-    onClickAddSetor: PropTypes.func,
-    onClickAddFuncionario: PropTypes.func,
-    onClickAddFalta: PropTypes.func,
+    go: PropTypes.func,
   }
   render() {
     const {
       onClickToggleMenu,
-      onClickProfileLink,
-      onClickHelpLink,
       onClickLogoutLink,
-      onClickAddDepartamento,
-      onClickAddSetor,
-      onClickAddFuncionario,
-      onClickAddFalta,
+      go,
     } = this.props
     return (
       <MUIAppBar
@@ -46,18 +36,18 @@ class AppBar extends React.Component {
             targetOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
           >
-            <MenuItem
+            {/* <MenuItem
               leftIcon={<Profile />}
               primaryText="Profile"
               onClick={onClickProfileLink}
-            />
+            /> */}
             <Divider />
             <MenuItem
               leftIcon={<Add />}
-              primaryText="Adicionar departamento"
-              onClick={onClickAddDepartamento}
+              primaryText="Adicionar restaurante"
+              onClick={() => go('/restaurantes/add')}
             />
-            <MenuItem
+            {/* <MenuItem
               leftIcon={<Add />}
               primaryText="Adicionar setor"
               onClick={onClickAddSetor}
@@ -77,6 +67,7 @@ class AppBar extends React.Component {
               primaryText="Ajuda"
               onClick={onClickHelpLink}
             />
+            */}
             <MenuItem
               leftIcon={<Logout />}
               primaryText="Logout"
@@ -90,5 +81,4 @@ class AppBar extends React.Component {
 }
 
 
-
-export default AppBar;
+export default AppBar

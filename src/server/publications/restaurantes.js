@@ -7,9 +7,9 @@ Meteor.publish('restaurantes', () => {
 })
 
 
-Meteor.publish('restaurantes.single', ({ id }) => {
-  check(id, String)
+Meteor.publish('restaurantes.single', ({ restauranteId }) => {
+  check(restauranteId, String)
   return Restaurantes.find({
-    _id: id,
+    _id: restauranteId,
   })
 })

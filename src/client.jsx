@@ -21,8 +21,9 @@ window.Perf = Perf
 Meteor.startup(() => {
   // Package['msavin:mongol'].Mongol.showCollection('departamentos')
   // Package['msavin:mongol'].Mongol.showCollection('setores')
-  // Package['msavin:mongol'].Mongol.showCollection('funcionarios')
-  // Package['msavin:mongol'].Mongol.showCollection('pontos')
+  Package['msavin:mongol'].Mongol.showCollection('questionarios')
+  Package['msavin:mongol'].Mongol.showCollection('promocoes')
+  Package['msavin:mongol'].Mongol.showCollection('produtos')
   Package['msavin:mongol'].Mongol.showCollection('restaurantes')
 
   ReactDOM.render(

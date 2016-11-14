@@ -2,13 +2,16 @@ import React, {
   Component,
   PropTypes,
 } from 'react'
-import Panel from '@components/Panel'
+import PromocoesList from '@components/PromocoesList'
 
 export default class RestaurantePromocoes extends Component {
-
   static defaultProps = {}
 
-  static propTypes = {}
+  static propTypes = {
+    promocoes: PropTypes.array,
+    onDelete: PropTypes.func,
+    onEdit: PropTypes.func,
+  }
 
   constructor(props) {
     super(props)
@@ -16,9 +19,19 @@ export default class RestaurantePromocoes extends Component {
   }
 
   render() {
+    const {
+      promocoes,
+      onDelete,
+      onEdit,
+    } = this.props
+
     return (
       <div>
-        <h1>grid</h1>
+        <PromocoesList
+          promocoes={promocoes}
+          onDelete={(promocaoId) => console.log('delete!')}
+          onEdit={(promocaoId) => console.log('edit!')}
+        />
       </div>
     )
   }

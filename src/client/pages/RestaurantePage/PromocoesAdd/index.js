@@ -2,12 +2,18 @@ import React, {
   Component,
   PropTypes,
 } from 'react'
-
-export default class PromocoesAdd extends Component {
+import PromocoesAdd from '@containers/PromocoesAdd'
+import Panel from '@components/Panel'
+import { Add } from '@resources/icons'
+export default class PromocoesAddPage extends Component {
 
   static defaultProps = {}
 
-  static propTypes = {}
+  static propTypes = {
+    params: PropTypes.shape({
+      restauranteId: PropTypes.string,
+    }),
+  }
 
   constructor(props) {
     super(props)
@@ -16,9 +22,11 @@ export default class PromocoesAdd extends Component {
 
   render() {
     return (
-      <div>
-        Promoções Add
-      </div>
+      <Panel title="Adicionar Promoção" icon={<Add />}>
+        <PromocoesAdd
+          restauranteId={this.props.params.restauranteId}
+        />
+      </Panel>
     )
   }
 

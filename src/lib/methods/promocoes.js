@@ -3,7 +3,7 @@ import PromocaoSchema from '@schemas/promocao';
 import Promocoes from '@collections/promocoes';
 
 export const insert = new ValidatedMethod({
-  name: 'promocoes.insert',
+  name: 'Promocoes.methods.insert',
   validate: PromocaoSchema.validator(),
   run(data) {
     return Promocoes.insert(data);

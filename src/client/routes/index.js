@@ -16,6 +16,7 @@ import RestaurantePage, {
   RestauranteDashboard,
   PromocoesAdd,
   QuestionariosAdd,
+  ProdutosAdd,
 } from '@pages/RestaurantePage'
 
 // import { UserAuthWrapper } from 'redux-auth-wrapper'
@@ -51,6 +52,7 @@ const Routes = () => (
             <IndexRoute component={RestauranteDashboard} />
             <Route path="promocoes/add" component={PromocoesAdd} />
             <Route path="questionarios/add" component={QuestionariosAdd} />A
+            <Route path="produtos/add" component={ProdutosAdd} />A
           </Route>
         </Route>
         <Route path="usuarios" component={UsersPage} />

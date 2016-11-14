@@ -3,7 +3,7 @@ import ProdutoSchema from '@schemas/produto'
 import Produtos from '@collections/produtos'
 
 export const insert = new ValidatedMethod({
-  name: 'produtos.insert',
+  name: 'Produtos.methods.insert',
   validate: ProdutoSchema.validator(),
   run(data) {
     return Produtos.insert(data)

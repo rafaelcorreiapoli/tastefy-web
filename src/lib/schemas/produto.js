@@ -3,11 +3,10 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 export default new SimpleSchema({
   restauranteId: {
     type: String,
-    optional: true,
   },
-  promocaoId: {
-    type: String,
-  },
+  // promocaoId: {
+  //   type: String,
+  // },
   nome: {
     type: String,
   },

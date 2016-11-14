@@ -2,13 +2,16 @@ import React, {
   Component,
   PropTypes,
 } from 'react'
+import QuestionariosList from '@components/QuestionariosList'
 
 
 export default class RestauranteQuestionarios extends Component {
 
   static defaultProps = {}
 
-  static propTypes = {}
+  static propTypes = {
+    questionarios: PropTypes.array,
+  }
 
   constructor(props) {
     super(props)
@@ -16,9 +19,17 @@ export default class RestauranteQuestionarios extends Component {
   }
 
   render() {
+    const {
+      questionarios,
+    } = this.props
+
     return (
       <div>
-        <h1>grid</h1>
+        <QuestionariosList
+          questionarios={questionarios}
+          onDelete={questionarioId => console.log('delete!')}
+          onEdit={questionarioId => console.log('edit!')}
+        />
       </div>
     )
   }

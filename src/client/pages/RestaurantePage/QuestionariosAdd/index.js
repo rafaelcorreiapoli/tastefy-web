@@ -2,12 +2,19 @@ import React, {
   Component,
   PropTypes,
 } from 'react'
+import QuestionariosAdd from '@containers/QuestionariosAdd'
+import Panel from '@components/Panel'
+import { Add } from '@resources/icons'
 
-export default class QuestionariosAdd extends Component {
+export default class QuestionariosAddPage extends Component {
 
   static defaultProps = {}
 
-  static propTypes = {}
+  static propTypes = {
+    params: PropTypes.shape({
+      restauranteId: PropTypes.string,
+    }),
+  }
 
   constructor(props) {
     super(props)
@@ -16,9 +23,11 @@ export default class QuestionariosAdd extends Component {
 
   render() {
     return (
-      <div>
-        Questionário Add
-      </div>
+      <Panel title="Adicionar Questionário" icon={<Add />} >
+        <QuestionariosAdd
+          restauranteId={this.props.params.restauranteId}
+        />
+      </Panel>
     )
   }
 

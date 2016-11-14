@@ -5,6 +5,9 @@ import React, {
 
 import Restaurante from '@containers/Restaurante'
 export RestauranteDashboard from './Dashboard'
+export ProdutosAdd from './ProdutosAdd'
+export PromocoesAdd from './PromocoesAdd'
+export QuestionariosAdd from './QuestionariosAdd'
 
 export default class RestaurantePage extends Component {
 

@@ -12,6 +12,7 @@
         "@collections": "lib/collections",
         "@resources": "lib/resources",
         "@ducks": "client/ducks",
+        "@hocs": "client/hocs",
         "@components": "client/components",
         "@containers": "client/containers",
         "@pages": "client/pages",

@@ -11,6 +11,10 @@ const styles = {
     marginBottom: 0,
     marginTop: 0,
   },
+  toolbar: {
+    float: 'right',
+    alignSelf: 'flex-end',
+  },
 }
 
 class FilterWrapper extends React.Component {
@@ -19,6 +23,7 @@ class FilterWrapper extends React.Component {
     title: PropTypes.string,
     icon: PropTypes.element,
     style: PropTypes.object,
+    toolbar: PropTypes.node,
   }
   render() {
     const {
@@ -26,6 +31,7 @@ class FilterWrapper extends React.Component {
       icon,
       children,
       style,
+      toolbar,
       ...props,
     } = this.props
     return (
@@ -35,6 +41,9 @@ class FilterWrapper extends React.Component {
             style: { marginRight: 10 },
           })}
           <h3 style={styles.title}>{title}</h3>
+          <div style={styles.toolbar}>
+            {toolbar && toolbar}
+          </div>
         </div>
         <div>
           {children}

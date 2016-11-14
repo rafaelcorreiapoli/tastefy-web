@@ -6,7 +6,7 @@ import Questionarios from '@collections/questionarios'
 import Perguntas from '@collections/perguntas'
 
 export const insert = new ValidatedMethod({
-  name: 'questionarios.insert',
+  name: 'Questionarios.methods.insert',
   validate({ questionario, perguntas }) {
     check(questionario, QuestionarioSchema)
     check(perguntas, [PerguntaSchema.pick(['titulo', 'tipo', 'config', 'widget'])])

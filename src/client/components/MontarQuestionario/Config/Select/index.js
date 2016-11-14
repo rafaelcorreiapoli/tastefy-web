@@ -30,7 +30,7 @@ export default class SelectConfig extends Component {
   static defaultProps = {}
 
   static propTypes = {
-    prefix: PropTypes.string,
+    fields: PropTypes.object,
   }
 
   constructor(props) {
@@ -40,51 +40,44 @@ export default class SelectConfig extends Component {
 
   render() {
     const {
-      prefix,
+      fields,
     } = this.props
     return (
       <div>
-        <FieldArray
-          name="options"
-          component={options => (
-            <div>
-              <div style={styles.optionsContainer}>
-                {
-                  options && options.fields.map((option, optionIndex) => (
-                    <div key={optionIndex} style={styles.optionContainer}>
-                      <span style={{ color: '#d3d3d3', marginRight: 20 }}>
-                        #{optionIndex + 1}.
-                      </span>
-                      <Field
-                        name={`${prefix}.${option}.value`}
-                        component={TextField}
-                        hintText="Value"
-                        style={{ marginRight: 20 }}
-                      />
-                      <Field
-                        name={`${prefix}.${option}.label`}
-                        component={TextField}
-                        hintText="Label"
-                        style={{ marginRight: 20 }}
-                        fullWidth
-                      />
-                      <IconButton
-                        tooltip="Remover opção"
-                        onTouchTap={() => options.fields.remove(optionIndex)}
-                      >
-                        <Remove />
-                      </IconButton>
-                    </div>
-                  ))
-                }
+        <div style={styles.optionsContainer}>
+          {
+            fields.map((option, optionIndex) => (
+              <div key={optionIndex} style={styles.optionContainer}>
+                <span style={{ color: '#d3d3d3', marginRight: 20 }}>
+                  #{optionIndex + 1}.
+                </span>
+                <Field
+                  name={`${option}.value`}
+                  component={TextField}
+                  hintText="Value"
+                  style={{ marginRight: 20 }}
+                />
+                <Field
+                  name={`${option}.label`}
+                  component={TextField}
+                  hintText="Label"
+                  style={{ marginRight: 20 }}
+                  fullWidth
+                />
+                <IconButton
+                  tooltip="Remover opção"
+                  onTouchTap={() => fields.remove(optionIndex)}
+                >
+                  <Remove />
+                </IconButton>
               </div>
-              <FlatButton
-                onTouchTap={() => options.fields.push()}
-                label="Adicionar Opção"
-                primary
-              />
-            </div>
-          )}
+            ))
+          }
+        </div>
+        <FlatButton
+          onTouchTap={() => fields.push()}
+          label="Adicionar Opção"
+          primary
         />
       </div>
     )

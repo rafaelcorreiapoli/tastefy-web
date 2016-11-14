@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { reduxForm, Field } from 'redux-form'
+import { reduxForm, Field, FieldArray } from 'redux-form'
 import Joi from 'joi-browser'
 import { RaisedButton } from 'material-ui'
 import InputWrapper from '@components/ReduxFormWidgets/InputWrapper'
@@ -7,6 +7,9 @@ import validator from '@utils/validator'
 import {
   TextField,
 } from 'redux-form-material-ui'
+import MontarQuestionario from '@components/MontarQuestionario'
+import Divider from 'material-ui/Divider'
+import PerguntasField from '@components/PerguntasField'
 
 const schema = Joi.object({
   nome: Joi.string().required(),
@@ -45,6 +48,12 @@ class QuestionariosAddForm extends React.Component {
             type="number"
             fullWidth
           />
+          <Divider style={{ marginLeft: -20, marginRight: -20, marginTop: 30, marginBottom: 30 }} />
+          <h3>Configurar Perguntas</h3>
+          <FieldArray
+            name="perguntas"
+            component={PerguntasField}
+          />
         </InputWrapper>
         <InputWrapper>
           <RaisedButton
@@ -61,7 +70,7 @@ class QuestionariosAddForm extends React.Component {
 
 
 export default reduxForm({
-  form: 'insertProduto',
+  form: 'insertQuestionario',
   destroyOnUnmount: false,
   validate,
 })(QuestionariosAddForm)

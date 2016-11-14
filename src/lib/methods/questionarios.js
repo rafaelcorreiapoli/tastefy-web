@@ -13,9 +13,10 @@ export const insert = new ValidatedMethod({
   },
   run({ questionario, perguntas }) {
     const questionarioId = Questionarios.insert(questionario)
-    perguntas.forEach((pergunta) => {
+    perguntas.forEach((pergunta, i) => {
       Perguntas.insert({
         questionarioId,
+        ordem: i,
         ...pergunta,
       })
     })

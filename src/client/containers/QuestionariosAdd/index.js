@@ -17,14 +17,17 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   onSubmit(values) {
     console.log(values)
     const questionario = {
-      ...values,
-      restauranteId: ownProps.restauranteId,
+      nome: values.nome,
       tempoMedio: Number(values.tempoMedio),
+      restauranteId: ownProps.restauranteId,
     }
-    console.log(questionario)
+
+    const perguntas = values.perguntas
+    console.log(questionario, perguntas)
+    
     dispatch(call(METHOD, {
       questionario,
-      perguntas: [],
+      perguntas,
     }))
     .then(() => {
       Alert.success('Questionário criada')

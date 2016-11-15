@@ -1,39 +1,42 @@
-import { Accounts } from 'meteor/accounts-base';
-import { Roles } from 'meteor/alanning:roles';
-import { Chance } from 'chance';
-import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { check } from 'meteor/check'
+import { Accounts } from 'meteor/accounts-base'
+import { Roles } from 'meteor/alanning:roles'
+import { Chance } from 'chance'
+import { ValidatedMethod } from 'meteor/mdg:validated-method'
+import { Match, check } from 'meteor/check'
 
 export const invite = new ValidatedMethod({
-  name: 'users.invite',
+  name: 'Users.methods.invite',
   validate({ email, restauranteId, role }) {
     check(email, String)
-    check(restauranteId, String)
-    check(role, String);
+    check(restauranteId, Match.Optional(String))
+    check(role, String)
   },
-  run({ email, restauranteId, role }) {
+  run({ email, restauranteId, role, nomeCompleto }) {
     if (!this.isSimulation) {
-      this.unblock();
-      const chance = new Chance();
-      const password = chance.bb_pin();
+      this.unblock()
+      const chance = new Chance()
+      const password = chance.bb_pin()
       const options = {
         email,
         password,
         restauranteId,
-      };
+        profile: {
+          nomeCompleto,
+        },
+      }
 
       try {
-        const userId = Accounts.createUser(options);
-        Accounts.sendEnrollmentEmail(userId, email);
-        Roles.addUsersToRoles(userId, role);
-        return true;
+        const userId = Accounts.createUser(options)
+        Accounts.sendEnrollmentEmail(userId, email)
+        Roles.addUsersToRoles(userId, role)
+        return true
       } catch (e) {
-        throw new Meteor.Error(e.toString());
+        throw new Meteor.Error(e.toString())
       }
     }
-    return true;
+    return true
   },
-});
+})
 
 export const activate = new ValidatedMethod({
   name: 'users.activate',
@@ -47,4 +50,4 @@ export const activate = new ValidatedMethod({
       },
     })
   },
-});
+})

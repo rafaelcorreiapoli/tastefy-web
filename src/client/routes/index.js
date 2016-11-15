@@ -11,6 +11,7 @@ import RegistrarPontoPage from '@pages/RegistrarPontoPage'
 import WelcomePage from '@pages/WelcomePage'
 import UploaderPage from '@pages/UploaderPage'
 import Loading from '@components/Loading'
+import UsersAddPage from '@pages/UsersAddPage'
 
 import RestaurantePage, {
   RestauranteDashboard,
@@ -55,7 +56,10 @@ const Routes = () => (
             <Route path="produtos/add" component={ProdutosAdd} />A
           </Route>
         </Route>
-        <Route path="usuarios" component={UsersPage} />
+        <Route path="usuarios">
+          <IndexRoute component={UsersPage} />
+          <Route path="add" component={UsersAddPage} />
+        </Route>
       </Route>
     </Route>
   </Router>

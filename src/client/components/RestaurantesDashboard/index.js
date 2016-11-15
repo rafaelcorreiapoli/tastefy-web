@@ -30,15 +30,21 @@ class RestaurantesDashboard extends React.Component {
   _renderResult(restaurante, i) {
     const {
       searchText,
+      go,
     } = this.props
 
     return (
-      <RestauranteCard
+      <div
         key={i}
-        {...restaurante}
         style={{ width: 250 }}
-        highlight={searchText}
-      />
+      >
+        <RestauranteCard
+          {...restaurante}
+          highlight={searchText}
+          onClickRestaurante={() => go(`/restaurantes/${restaurante._id}`)}
+        />
+      </div>
+
     )
   }
 

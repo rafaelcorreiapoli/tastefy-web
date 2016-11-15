@@ -15,23 +15,30 @@ class RestauranteCard extends React.Component {
     nome: PropTypes.string.isRequired,
     style: PropTypes.object,
     highlight: PropTypes.string,
+    onClickRestaurante: PropTypes.func,
   }
   render() {
     const {
       style,
       nome,
       highlight,
+      onClickRestaurante,
     } = this.props
 
     return (
       <Card style={style}>
         <CardHeader
           title={
+            <FlatButton
+              onTouchTap={onClickRestaurante}
+            >
             <Highlighter
               highlightClassName="highlight"
               searchWords={[highlight]}
               textToHighlight={nome}
             />
+            </FlatButton>
+
           }
         />
         <Divider />

@@ -3,6 +3,9 @@ import PromocoesAddForm from '@components/PromocoesAddForm'
 import { call, getMethodState } from '@ducks/methods'
 import Alert from 'react-s-alert'
 import { reset } from 'redux-form'
+import { composeWithTracker } from 'react-komposer'
+import { Meteor } from 'meteor/meteor'
+import Produtos from '@collections/produtos'
 
 const METHOD = 'Promocoes.methods.insert'
 
@@ -33,9 +36,26 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 })
 
+const compose = (props, onData) => {
+  const handler = Meteor.subscribe('produtos.quickList')
+
+  if (handler.ready()) {
+    const optionsProdutos = Produtos.find({}, {
+      fields: {
+        _id: 1,
+        nome: 1,
+        imagemUrl: 1,
+      },
+    }).fetch()
+    onData(null, {
+      optionsProdutos,
+    })
+  }
+}
+
 const PromocaoAdd = connect(
   mapStateToProps,
   mapDispatchToProps
 )(PromocoesAddForm)
 
-export default PromocaoAdd
+export default composeWithTracker(compose)(PromocaoAdd)

@@ -24,3 +24,17 @@ Meteor.publishComposite('produtos.porPromocao', ({ promocaoId }) => {
     },
   }
 })
+
+Meteor.publishComposite('produtos.quickList', () => {
+  return {
+    find() {
+      return Produtos.find({}, {
+        fields: {
+          _id: 1,
+          nome: 1,
+          imagemUrl: 1,
+        },
+      })
+    },
+  }
+})

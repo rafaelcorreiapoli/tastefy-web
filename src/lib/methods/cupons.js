@@ -8,7 +8,7 @@ import Cupons from '@collections/cupons'
 import { Roles } from 'meteor/alanning:roles'
 
 export const insert = new ValidatedMethod({
-  name: 'cupons.insert',
+  name: 'Cupons.methods.insert',
   validate({ restauranteId }) {
     if (Roles.userIsInRole(Meteor.userId(), ['admin'])) {
       check(restauranteId, String)

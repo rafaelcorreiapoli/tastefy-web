@@ -13,3 +13,13 @@ Meteor.publish('restaurantes.single', ({ restauranteId }) => {
     _id: restauranteId,
   })
 })
+
+
+Meteor.publish('restaurantes.quickList', function quickList() {
+  return Restaurantes.find({}, {
+    fields: {
+      _id: 1,
+      nome: 1,
+    },
+  })
+})

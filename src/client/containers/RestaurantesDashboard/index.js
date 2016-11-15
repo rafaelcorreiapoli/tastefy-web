@@ -7,6 +7,7 @@ import convertSortStringToObject from '@utils/convert_sort_object'
 import convertFormObjectToFilterObject, { RANGE } from '@utils/convert_filter_object'
 import Loading from '@components/Loading'
 import Restaurantes from '@collections/restaurantes'
+import withLinks from '@hocs/withLinks'
 
 const composer = (props, onData) => {
   const {
@@ -58,6 +59,6 @@ const composer = (props, onData) => {
   }
 }
 
-export default searchHOC(composeWithTracker(composer, Loading)(RestaurantesDashboard), {
+export default searchHOC(composeWithTracker(composer, Loading)(withLinks(RestaurantesDashboard)), {
   searchId: 'restaurantes',
 })

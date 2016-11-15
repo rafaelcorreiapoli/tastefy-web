@@ -33,12 +33,14 @@ class UsersDashboard extends React.Component {
     } = this.props
 
     return (
-      <UserCard
-        key={i}
-        nome={user.profile.nomeCompleto}
-        style={{ width: 250 }}
-        highlight={searchText}
-      />
+      <div key={i} style={{ width: 250 }}>
+        <UserCard
+          nome={user.profile.nomeCompleto}
+          style={{ width: 250 }}
+          highlight={searchText}
+        />
+      </div>
+
     )
   }
 

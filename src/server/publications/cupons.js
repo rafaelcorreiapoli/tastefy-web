@@ -91,6 +91,19 @@ Meteor.publishComposite('cupons.porRestaurante', ({ restauranteId }) => {
         restauranteId,
       })
     },
+    children: [
+      {
+        find(cupom) {
+          return Meteor.users.find({
+            _id: cupom.geradoPor,
+          }, {
+            fields: {
+              'profile.nomeCompleto': 1,
+            },
+          })
+        },
+      },
+    ],
   }
 })
 

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { Grid, Row, Col } from 'react-flexbox-grid/lib/index'
-import { CSSGrid, measureItems, makeResponsive } from 'react-stonecutter'
+import { CSSGrid, measureItems, makeResponsive, SpringGrid, layout } from 'react-stonecutter'
 import UltimatePaginationMaterialUi from 'react-ultimate-pagination-material-ui'
 // import makeResponsive from '@helpers/responsive'
 import FilterWrapper from '@components/FilterWrapper'
@@ -35,7 +35,11 @@ const styles = {
   },
 }
 
-const ResultsGrid = makeResponsive(CSSGrid, {
+// const ResultsGrid = makeResponsive(measureItems(CSSGrid), {
+//   maxWidth: 1036,
+//   minPadding: 10,
+// })
+const ResultsGrid = makeResponsive(measureItems(SpringGrid), {
   maxWidth: 1036,
   minPadding: 10,
 })
@@ -85,9 +89,10 @@ class DashboardUI extends React.Component {
       return (
         <div>
           <ResultsGrid
-            gutterHeight={20}
+            gutterHeight={5}
             columnWidth={250}
             gutterWidth={5}
+            layout={layout.pinterest}
             easing="ease-out"
             springConfig={{ stiffness: 170, damping: 26 }}
             duration={200}

@@ -1,9 +1,12 @@
 import React, { PropTypes } from 'react'
-import { reduxForm, Field } from 'redux-form'
+import { reduxForm, Field, FieldArray } from 'redux-form'
 import Joi from 'joi-browser'
 import { RaisedButton, MenuItem } from 'material-ui'
 import InputWrapper from '@components/ReduxFormWidgets/InputWrapper'
 import validator from '@utils/validator'
+import SelecionarProdutoField from '@components/ReduxFormWidgets/SelecionarProdutoField'
+
+
 import {
   TextField,
   DatePicker,
@@ -16,6 +19,7 @@ const schema = Joi.object({
   descricao: Joi.string().required(),
   imagemUrl: Joi.string().required(),
   ativa: Joi.boolean(),
+  produtosId: Joi.array().items(Joi.string()),
 })
 
 const validate = values => validator(values, schema)
@@ -25,6 +29,7 @@ class PromocoesAddForm extends React.Component {
     handleSubmit: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     invalid: PropTypes.bool.isRequired,
+    optionsProdutos: PropTypes.array,
   }
 
   render() {
@@ -32,6 +37,7 @@ class PromocoesAddForm extends React.Component {
       handleSubmit,
       onSubmit,
       invalid,
+      optionsProdutos,
     } = this.props
 
     return (
@@ -64,9 +70,18 @@ class PromocoesAddForm extends React.Component {
             label="Ativa"
             component={Checkbox}
             name="ativa"
-            style={{ marginTop: 20 }}
+            style={{ marginTop: 20, marginBottom: 20 }}
             normalize={v => Boolean(v)}
           />
+          <Field
+            component={SelecionarProdutoField}
+            name="produtosId"
+            produtos={optionsProdutos}
+          />
+          {/* <SelecionarProdutoField
+            value={['a', 'b']}
+            produtos={optionsProdutos}
+          /> */}
         </InputWrapper>
         <InputWrapper>
           <RaisedButton

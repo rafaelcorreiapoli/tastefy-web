@@ -47,6 +47,11 @@ class AppBar extends React.Component {
               primaryText="Adicionar restaurante"
               onClick={() => go('/restaurantes/add')}
             />
+            <MenuItem
+              leftIcon={<Add />}
+              primaryText="Adicionar usuário"
+              onClick={() => go('/usuarios/add')}
+            />
             {/* <MenuItem
               leftIcon={<Add />}
               primaryText="Adicionar setor"

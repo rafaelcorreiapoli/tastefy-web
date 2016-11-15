@@ -18,6 +18,8 @@ export default function configAccounts() {
       returnUser.restauranteId = options.restauranteId
     }
     returnUser.profile = options.profile || {}
+    console.log(options)
+    console.log(returnUser)
     return returnUser
   })
 }

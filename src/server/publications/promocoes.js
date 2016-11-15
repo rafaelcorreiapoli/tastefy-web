@@ -14,6 +14,7 @@ Meteor.publishComposite('promocoes.ativas', () => {
     children: [{
       find(promocao) {
         const { restauranteId } = promocao
+        console.log(restauranteId)
         return Restaurantes.find({
           _id: restauranteId,
         })
@@ -30,6 +31,7 @@ Meteor.publishComposite('promocoes', () => {
     children: [{
       find(promocao) {
         const { restauranteId } = promocao
+        console.log(restauranteId)
         return Restaurantes.find({
           _id: restauranteId,
         })

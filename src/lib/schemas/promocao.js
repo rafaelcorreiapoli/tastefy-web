@@ -25,4 +25,8 @@ export default new SimpleSchema({
     optional: true,
     defaultValue: false,
   },
-});
+  produtosId: {
+    type: [String],
+    optional: true,
+  },
+})

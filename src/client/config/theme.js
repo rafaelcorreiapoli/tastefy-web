@@ -5,7 +5,4 @@ export default getMuiTheme({
   palette: {
     primary1Color: PRIMARY_COLOR,
   },
-  tooltip: {
-    zIndex: 99999,
-  },
 })

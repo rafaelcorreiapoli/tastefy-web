@@ -25,14 +25,19 @@ Meteor.publishComposite('produtos.porPromocao', ({ promocaoId }) => {
   }
 })
 
-Meteor.publishComposite('produtos.quickList', () => {
+Meteor.publishComposite('produtos.quickList', ({ restauranteId }) => {
+  check(restauranteId, String)
+
   return {
     find() {
-      return Produtos.find({}, {
+      return Produtos.find({
+        restauranteId,
+      }, {
         fields: {
           _id: 1,
           nome: 1,
           imagemUrl: 1,
+          restauranteId: 1,
         },
       })
     },

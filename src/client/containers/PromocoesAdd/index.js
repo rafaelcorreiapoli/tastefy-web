@@ -36,11 +36,17 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 })
 
-const compose = (props, onData) => {
-  const handler = Meteor.subscribe('produtos.quickList')
+const compose = ({ restauranteId }, onData) => {
+  const handler = Meteor.subscribe('produtos.quickList', {
+    restauranteId,
+  })
+
+  console.log(restauranteId)
 
   if (handler.ready()) {
-    const optionsProdutos = Produtos.find({}, {
+    const optionsProdutos = Produtos.find({
+      restauranteId,
+    }, {
       fields: {
         _id: 1,
         nome: 1,

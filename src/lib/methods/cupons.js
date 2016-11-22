@@ -102,7 +102,9 @@ export const claim = new ValidatedMethod({
     }
     if (cupom.ownerId) {
       if (cupom.ownerId === ownerId) {
-        throw new Meteor.Error('cupons.claim.voceJaEDono')
+        throw new Meteor.Error('cupons.claim.voceJaEDono', '', {
+          cupomId: cupom._id,
+        })
       } else {
         throw new Meteor.Error('cupons.claim.cupomTemOutroDono')
       }
@@ -110,7 +112,7 @@ export const claim = new ValidatedMethod({
 
     const { _id } = cupom
 
-    return Cupons.update({
+    const update = Cupons.update({
       _id,
     }, {
       $set: {
@@ -118,5 +120,12 @@ export const claim = new ValidatedMethod({
         data,
       },
     })
+
+    if (update) {
+      return {
+        cupomId: _id,
+      }
+    }
+    throw new Meteor.Error('cupons.claim.erroUpdate')
   },
 })

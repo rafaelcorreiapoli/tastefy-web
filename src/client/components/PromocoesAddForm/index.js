@@ -18,6 +18,7 @@ const schema = Joi.object({
   validoAte: Joi.object().required(),
   descricao: Joi.string().required(),
   imagemUrl: Joi.string().required(),
+  regras: Joi.string().required(),
   ativa: Joi.boolean(),
   produtosId: Joi.array().items(Joi.string()),
 })
@@ -58,6 +59,12 @@ class PromocoesAddForm extends React.Component {
             floatingLabelText="Descrição"
             component={TextField}
             name="descricao"
+            fullWidth
+          />
+          <Field
+            floatingLabelText="Regras"
+            component={TextField}
+            name="regras"
             fullWidth
           />
           <Field

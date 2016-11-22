@@ -9,12 +9,16 @@ import Produtos from '@collections/produtos'
 Meteor.publishComposite('promocoes.ativas', () => {
   return {
     find() {
-      return Promocoes.find({ ativa: true })
+      return Promocoes.find({
+        ativa: true,
+        validoAte: {
+          $gte: new Date(),
+        },
+      })
     },
     children: [{
       find(promocao) {
         const { restauranteId } = promocao
-        console.log(restauranteId)
         return Restaurantes.find({
           _id: restauranteId,
         })
@@ -31,7 +35,6 @@ Meteor.publishComposite('promocoes', () => {
     children: [{
       find(promocao) {
         const { restauranteId } = promocao
-        console.log(restauranteId)
         return Restaurantes.find({
           _id: restauranteId,
         })
@@ -84,7 +87,9 @@ Meteor.publishComposite('promocoes.single', ({ promocaoId }) => {
     children: [{
       find(promocao) {
         return Produtos.find({
-          promocaoId: promocao._id,
+          _id: {
+            $in: promocao.produtosId,
+          },
         })
       },
     }, {

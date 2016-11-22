@@ -62,3 +62,35 @@ Meteor.publishComposite('vouchers.single', function ({ voucherId }) {
     },
   }
 })
+
+Meteor.publishComposite('vouchers.utilizarVoucher', function utilizarVoucher({ voucherId }) {
+  return {
+    find() {
+      return Vouchers.find({
+        _id: voucherId,
+      })
+    },
+    children: [{
+      find(voucher) {
+        return Restaurantes.find({
+          _id: voucher._id,
+        })
+      },
+    }, {
+      find(voucher) {
+        return Promocoes.find({
+          _id: voucher.promocaoId,
+        })
+      },
+      children: [{
+        find(promocao) {
+          return Produtos.find({
+            _id: {
+              $in: promocao.produtosId,
+            },
+          })
+        },
+      }],
+    }],
+  }
+})

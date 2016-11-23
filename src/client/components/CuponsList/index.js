@@ -6,6 +6,7 @@ import GenericTable from '@components/GenericTable'
 import QRCode from 'qrcode.react'
 import moment from 'moment'
 import { Check, Close } from '@resources/icons'
+import FlatButton from 'material-ui/FlatButton'
 
 export default class CuponsList extends Component {
 
@@ -15,6 +16,7 @@ export default class CuponsList extends Component {
     cupons: PropTypes.array,
     onDelete: PropTypes.func,
     onEdit: PropTypes.func,
+    onClickQRCode: PropTypes.func,
   }
 
   constructor(props) {
@@ -27,28 +29,40 @@ export default class CuponsList extends Component {
       cupons,
       onDelete,
       onEdit,
+      onClickQRCode,
     } = this.props
 
     return (
-      <GenericTable
-        data={cupons}
-        headers={[
-          'Token',
-          'Gerado Em',
-          'Gerado Por',
-          'Utilizado',
-          'Ações',
-        ]}
-        getRowData={cupom => ([
-          <QRCode value={cupom.token} size={50} height={50} />,
-          moment(cupom.geradoEm).format('DD/MM/YYYY HH:mm:ss'),
-          cupom.geradoPor,
-          cupom.utilizado ? <Check /> : <Close />,
-        ])}
-        renderActions
-        onDelete={id => onDelete(id)}
-        onEdit={id => onEdit(id)}
-      />
+      <div>
+        <GenericTable
+          data={cupons}
+          headers={[
+            'Token',
+            'Gerado Em',
+            'Gerado Por',
+            'Utilizado',
+            'Ações',
+          ]}
+          getRowData={cupom => ([
+            <FlatButton
+              onTouchTap={() => onClickQRCode(cupom)}
+            >
+              <QRCode
+                value={cupom.token}
+                size={50}
+                height={50}
+              />
+            </FlatButton>,
+            moment(cupom.geradoEm).format('DD/MM/YYYY HH:mm:ss'),
+            cupom.geradoPor,
+            cupom.utilizado ? <Check /> : <Close />,
+          ])}
+          renderActions
+          onDelete={id => onDelete(id)}
+          onEdit={id => onEdit(id)}
+        />
+      </div>
+
     )
   }
 

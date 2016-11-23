@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+import { combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
 import { routerReducer } from 'react-router-redux'
 import counter from '@ducks/counter'
 import methods from '@ducks/methods'
@@ -11,6 +11,7 @@ import autenticarPonto from '@ducks/autenticarPonto'
 import uploader from '@ducks/uploader'
 import search from '@ducks/search'
 import dashboard from 'ducks-dashboard'
+import restauranteCupons from '@ducks/restauranteCupons'
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   uploader,
   search,
   dashboard,
-});
+  restauranteCupons,
+})
 
 export default rootReducer

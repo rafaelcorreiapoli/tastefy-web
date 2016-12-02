@@ -19,13 +19,15 @@ injectTapEventPlugin()
 // window.Perf = Perf
 
 Meteor.startup(() => {
-  // Package['msavin:mongol'].Mongol.showCollection('vouchers')
-  // Package['msavin:mongol'].Mongol.showCollection('cupons')
-  // Package['msavin:mongol'].Mongol.showCollection('perguntas')
-  // Package['msavin:mongol'].Mongol.showCollection('questionarios')
-  // Package['msavin:mongol'].Mongol.showCollection('promocoes')
-  // Package['msavin:mongol'].Mongol.showCollection('produtos')
-  // Package['msavin:mongol'].Mongol.showCollection('restaurantes')
+  if (process.env.NODE_ENV === 'development') {
+    Package['msavin:mongol'].Mongol.showCollection('vouchers')
+    Package['msavin:mongol'].Mongol.showCollection('cupons')
+    Package['msavin:mongol'].Mongol.showCollection('perguntas')
+    Package['msavin:mongol'].Mongol.showCollection('questionarios')
+    Package['msavin:mongol'].Mongol.showCollection('promocoes')
+    Package['msavin:mongol'].Mongol.showCollection('produtos')
+    Package['msavin:mongol'].Mongol.showCollection('restaurantes')
+  }
 
   ReactDOM.render(
     <Root />,

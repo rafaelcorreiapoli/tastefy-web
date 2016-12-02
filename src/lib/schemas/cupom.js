@@ -1,4 +1,4 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 
 export default new SimpleSchema({
   restauranteId: {
@@ -41,4 +41,4 @@ export default new SimpleSchema({
   questionarioId: {
     type: String,
   },
-});
+})

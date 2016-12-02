@@ -138,6 +138,22 @@ Meteor.publishComposite('cupons.cuponsGerados', function () {
         geradoPor: userId,
       })
     },
+    children: [{
+      find(cupom) {
+        const { ownerId } = cupom
+        if (ownerId) {
+          return Meteor.users.find({
+            _id: ownerId,
+          }, {
+            fields: {
+              _id: 1,
+              'profile.nomeCompleto': 1,
+            },
+          })
+        }
+        return null
+      },
+    }],
   }
 })
 
@@ -161,6 +177,22 @@ Meteor.publishComposite('cupons.single', ({ cupomId }) => {
             logoUrl: 1,
           },
         })
+      },
+    }, {
+      find(cupom) {
+        const { ownerId } = cupom
+        if (ownerId) {
+          return Meteor.users.find({
+            _id: ownerId,
+          }, {
+            fields: {
+              _id: 1,
+              'profile.nomeCompleto': 1,
+            },
+          })
+        } else {
+          return null
+        }
       },
     }],
   }

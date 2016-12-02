@@ -17,6 +17,7 @@ export const insert = new ValidatedMethod({
     }
   },
   run({ restauranteId }) {
+    Meteor._sleepForMs(2000)
     let acceptedRestauranteId
 
     if (Roles.userIsInRole(Meteor.userId(), ['restaurante'])) {

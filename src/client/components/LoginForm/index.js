@@ -83,7 +83,14 @@ class LoginForm extends React.Component {
               (onLoginWithFacebook || onLoginWithLinkedin) &&
               <OrSeparator style={{ marginTop: 20, marginBottom: 20, alignSelf: 'stretch' }} />
             }
-            <form autoComplete="off" style={styles.form}>
+            <form
+              autoComplete="off"
+              style={styles.form}
+              onSubmit={(e) => {
+                e.preventDefault()
+                onLoginWithPassword(email, password)
+              }}
+            >
               {error &&
                 <span style={styles.error}>
                   {(error.error === 403 && error.reason === 'User not found')
@@ -127,7 +134,8 @@ class LoginForm extends React.Component {
 
               <RaisedButton
                 style={{ minWidth: 300, width: '50%', marginTop: 30, marginBottom: 10 }}
-                onClick={() => onLoginWithPassword(email, password)}
+                type="submit"
+                // onClick={() => onLoginWithPassword(email, password)}
                 label="LOGIN"
                 labelPosition="after"
                 labelColor="white"

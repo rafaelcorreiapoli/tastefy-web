@@ -84,7 +84,6 @@ class DashboardUI extends React.Component {
       )
     }
 
-    console.log(results)
     if (results.length) {
       return (
         <div>

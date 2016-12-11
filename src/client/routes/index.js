@@ -12,6 +12,7 @@ import WelcomePage from '@pages/WelcomePage'
 import UploaderPage from '@pages/UploaderPage'
 import Loading from '@components/Loading'
 import UsersAddPage from '@pages/UsersAddPage'
+import GuestLayout from '@components/GuestLayout'
 
 import RestaurantePage, {
   RestauranteDashboard,
@@ -20,31 +21,31 @@ import RestaurantePage, {
   ProdutosAdd,
 } from '@pages/RestaurantePage'
 
-// import { UserAuthWrapper } from 'redux-auth-wrapper'
-// import { clearLogoutRequest } from '@ducks/login'
-// import { Meteor } from 'meteor/meteor'
+import { UserAuthWrapper } from 'redux-auth-wrapper'
+import { clearLogoutRequest } from '@ducks/login'
+import { Meteor } from 'meteor/meteor'
 import store from '../store'
 
-// const userIsAuthenticated = UserAuthWrapper({
-//   wrapperDisplayName: 'UserIsAuthenticated',
-//   authSelector: state => state.user.user,
-//   authenticatingSelector: state => !state.login.get('isMeteorUserFetched'),
-//   LoadingComponent: Loading,
-//   redirectAction: newLoc => (dispatch, getState) => {
-//     //  se o usuário clicou no botão de logout, vou mandá-lo para a tela de login sem o redirect
-//     const state = getState()
-//     if (state.login.get('logoutRequest')) {
-//       delete newLoc.query.redirect
-//     }
-//     dispatch(clearLogoutRequest())
-//     dispatch(replace(newLoc))
-//   },
-// })
+const userIsAuthenticated = UserAuthWrapper({
+  wrapperDisplayName: 'UserIsAuthenticated',
+  authSelector: state => state.user.user,
+  authenticatingSelector: state => !state.login.get('isMeteorUserFetched'),
+  LoadingComponent: Loading,
+  redirectAction: newLoc => (dispatch, getState) => {
+    //  se o usuário clicou no botão de logout, vou mandá-lo para a tela de login sem o redirect
+    const state = getState()
+    if (state.login.get('logoutRequest')) {
+      delete newLoc.query.redirect
+    }
+    dispatch(clearLogoutRequest())
+    dispatch(replace(newLoc))
+  },
+})
 
 const Routes = () => (
   <Router history={syncHistoryWithStore(browserHistory, store)}>
     <Route path="/" component={AppContainer}>
-      <Route component={AuthenticatedLayout}>
+      <Route component={userIsAuthenticated(AuthenticatedLayout)}>
         <IndexRoute component={WelcomePage} />
         <Route path="restaurantes">
           <IndexRoute component={RestaurantesPage} />
@@ -60,6 +61,10 @@ const Routes = () => (
           <IndexRoute component={UsersPage} />
           <Route path="add" component={UsersAddPage} />
         </Route>
+      </Route>
+
+      <Route component={GuestLayout}>
+        <Route path="/login" component={LoginScreen} />
       </Route>
     </Route>
   </Router>

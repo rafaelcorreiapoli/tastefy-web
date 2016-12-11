@@ -1,27 +1,28 @@
 import React, { PropTypes } from 'react'
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import MDSpinner from 'react-md-spinner';
-import styles from './styles';
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
+import MDSpinner from 'react-md-spinner'
+import Panel from '@components/Panel'
+import OrSeparator from '@components/OrSeparator'
 import { Facebook, Linkedin } from '@resources/icons'
-import OrSeparator from '../OrSeparator'
-import Radium from 'radium'
+import styles from './styles'
+
 
 const hideAutoFillColorStyle = {
   WebkitBoxShadow: '0 0 0 1000px white inset',
-};
+}
 
 class LoginForm extends React.Component {
   static propTypes = {
-    email: PropTypes.string,
-    password: PropTypes.string,
-    error: PropTypes.bool.isRequired,
+    email: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    error: PropTypes.object,
     success: PropTypes.bool.isRequired,
     loading: PropTypes.bool.isRequired,
     onChangeEmail: PropTypes.func.isRequired,
     onChangePassword: PropTypes.func.isRequired,
-    onClickRecuperarSenha: PropTypes.func.isRequired,
+    onRecoverPassword: PropTypes.func,
     onLoginWithPassword: PropTypes.func,
     onLoginWithFacebook: PropTypes.func,
     onLoginWithLinkedin: PropTypes.func,
@@ -39,26 +40,31 @@ class LoginForm extends React.Component {
       success,
       loading,
       style,
-      onClickRecuperarSenha,
+      onRecoverPassword,
       onLoginWithFacebook,
       onLoginWithLinkedin,
       redirect,
-      ...props,
+      ...props
     } = this.props
 
+    const mergedStyles = Object.assign({}, style, styles.container)
     return (
-      <div style={[style, styles.container]} {...props}>
+      <Panel style={mergedStyles} {...props}>
         <h1 style={{ fontWeight: 200 }}>Login</h1>
 
-        <RaisedButton
-          style={{ marginBottom: 20, minWidth: 300, width: '50%' }}
-          labelPosition="after"
-          onClick={onLoginWithFacebook}
-          label="LOGIN COM FACEBOOK"
-          icon={<Facebook size={24} />}
-          backgroundColor="#3b5998"
-          labelColor="white"
-        />
+        {
+          onLoginWithFacebook &&
+          <RaisedButton
+            style={{ marginBottom: 20, minWidth: 300, width: '50%' }}
+            labelPosition="after"
+            onClick={onLoginWithFacebook}
+            label="LOGIN COM FACEBOOK"
+            icon={<Facebook size={24} />}
+            backgroundColor="#3b5998"
+            labelColor="white"
+          />
+        }
+
 
         {onLoginWithLinkedin &&
           <RaisedButton
@@ -73,7 +79,10 @@ class LoginForm extends React.Component {
         }
         {onLoginWithPassword &&
           <div>
-            <OrSeparator style={{ marginTop: 20, marginBottom: 20, alignSelf: 'stretch' }} />
+            {
+              (onLoginWithFacebook || onLoginWithLinkedin) &&
+              <OrSeparator style={{ marginTop: 20, marginBottom: 20, alignSelf: 'stretch' }} />
+            }
             <form autoComplete="off" style={styles.form}>
               {error &&
                 <span style={styles.error}>
@@ -81,6 +90,8 @@ class LoginForm extends React.Component {
                     && 'Usuário não encontrado'}
                   {(error.error === 403 && error.reason === 'Incorrect password')
                     && 'Senha incorreta'}
+                  {(error.error === 400 && error.reason === 'Match Failed')
+                    && 'Usuário não encontrado'}
                 </span>
               }
               {loading &&
@@ -123,17 +134,21 @@ class LoginForm extends React.Component {
                 primary
               />
 
-              <FlatButton
-                style={{ minWidth: 300, width: '50%' }}
-                label="Esqueceu a senha?"
-                onClick={onClickRecuperarSenha}
-              />
+              {
+                onRecoverPassword &&
+                <FlatButton
+                  style={{ minWidth: 300, width: '50%' }}
+                  label="Esqueceu a senha?"
+                  onClick={onRecoverPassword}
+                />
+              }
+
             </form>
           </div>
         }
-      </div>
+      </Panel>
     )
   }
 }
 
-export default Radium(LoginForm)
+export default LoginForm

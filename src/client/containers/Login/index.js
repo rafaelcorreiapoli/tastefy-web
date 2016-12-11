@@ -7,41 +7,38 @@ import {
   loginWithLinkedin,
 } from '@ducks/login'
 import LoginForm from '@components/LoginForm'
-import { push } from 'react-router-redux';
+import { push } from 'react-router-redux'
 
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    email: state.login.get('email'),
-    password: state.login.get('password'),
-    success: state.login.get('success'),
-    error: state.login.get('error'),
-    loading: state.login.get('loading'),
-  }
-}
+const mapStateToProps = (state, ownProps) => ({
+  email: state.login.get('email'),
+  password: state.login.get('password'),
+  success: state.login.get('success'),
+  error: state.login.get('error'),
+  loading: state.login.get('loading'),
+})
 
-const mapDispatchToProps = (dispatch, ownProps = {}) => {
-  return {
-    onChangeEmail(email) {
-      dispatch(setLoginEmail(email));
-    },
-    onChangePassword(password) {
-      dispatch(setLoginPassword(password));
-    },
-    // onLoginWithPassword(email, password) {
-    //   dispatch(loginWithPassword(email, password))
+const mapDispatchToProps = (dispatch, ownProps = {}) => ({
+  onChangeEmail(email) {
+    dispatch(setLoginEmail(email))
+  },
+  onChangePassword(password) {
+    dispatch(setLoginPassword(password))
+  },
+  onLoginWithPassword(email, password) {
+    dispatch(loginWithPassword(email, password))
+      .then(() => {
+        const { redirect = '/' } = ownProps
+        dispatch(push(redirect))
+      })
+  },
+    // onLoginWithFacebook() {
+    //   dispatch(loginWithFacebook())
     //   .then(() => {
     //     const { redirect = '/' } = ownProps
     //     dispatch(push(redirect))
     //   })
     // },
-    onLoginWithFacebook() {
-      dispatch(loginWithFacebook())
-      .then(() => {
-        const { redirect = '/' } = ownProps
-        dispatch(push(redirect))
-      })
-    },
     // onLoginWithLinkedin() {
     //   dispatch(loginWithLinkedin())
     //   .then(() => {
@@ -49,11 +46,10 @@ const mapDispatchToProps = (dispatch, ownProps = {}) => {
     //     dispatch(push(redirect))
     //   })
     // },
-    onClickRecuperarSenha() {
-      dispatch(push('/recuperar-senha'))
-    }
-  }
-}
+  // onRecoverPassword() {
+  //   dispatch(push('/recuperar-senha'))
+  // },
+})
 
 const Login = connect(
   mapStateToProps,

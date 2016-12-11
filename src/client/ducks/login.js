@@ -1,14 +1,16 @@
 import { Map } from 'immutable'
-export const SET_LOGIN_EMAIL = 'login/SET_LOGIN_EMAIL';
-export const SET_LOGIN_PASSWORD = 'login/SET_LOGIN_PASSWORD';
-export const START_LOGIN = 'login/START_LOGIN';
-export const LOGIN_SUCCESS = 'login/LOGIN_SUCCESS';
-export const LOGIN_ERROR = 'login/LOGIN_ERROR';
+export const SET_LOGIN_EMAIL = 'login/SET_LOGIN_EMAIL'
+export const SET_LOGIN_PASSWORD = 'login/SET_LOGIN_PASSWORD'
+export const START_LOGIN = 'login/START_LOGIN'
+export const LOGIN_SUCCESS = 'login/LOGIN_SUCCESS'
+export const LOGIN_ERROR = 'login/LOGIN_ERROR'
 export const LOGOUT_REQUEST = 'login/LOGOUT_REQUEST'
 export const CLEAR_LOGOUT_REQUEST = 'login/CLEAR_LOGOUT_REQUEST'
 export const SET_METEOR_USER_FETCHED = 'login/SET_METEOR_USER_FETCHED'
+export const LOGOUT_DONE = 'login/LOGOUT_DONE'
+
 import { SET_USER } from './user'
-export const setMeteorUserFetched = (fetched) => ({
+export const setMeteorUserFetched = fetched => ({
   type: SET_METEOR_USER_FETCHED,
   payload: {
     fetched,
@@ -21,26 +23,30 @@ export function startLogin() {
   }
 }
 export function loginSuccess(userId) {
-    return {
-      type: LOGIN_SUCCESS,
-      payload: {
-        userId
-      }
-    }
+  return {
+    type: LOGIN_SUCCESS,
+    payload: {
+      userId,
+    },
+  }
 }
 
 export function loginError(error) {
   return {
     type: LOGIN_ERROR,
     payload: {
-      error
-    }
+      error,
+    },
   }
 }
 
+export const logoutDone = () => ({
+  type: LOGOUT_DONE,
+})
+
 export const loginWithFacebook = () => (dispatch, getState, Meteor) =>
   new Promise((resolve, reject) => {
-    dispatch(startLogin());
+    dispatch(startLogin())
     Meteor.loginWithFacebook({}, (err, res) => {
       if (err) {
         dispatch(loginError(err))
@@ -53,7 +59,7 @@ export const loginWithFacebook = () => (dispatch, getState, Meteor) =>
 
 
 export const loginWithLinkedin = () => (dispatch, getState, Meteor) => {
-  dispatch(startLogin());
+  dispatch(startLogin())
   return new Promise((resolve, reject) => (
     Meteor.loginWithLinkedin({}, (err, res) => {
       if (err) {
@@ -70,7 +76,7 @@ export const loginWithLinkedin = () => (dispatch, getState, Meteor) => {
 
 export const loginWithPassword = (email, password) => (dispatch, getState, Meteor) => {
   console.log(email, password)
-  dispatch(startLogin());
+  dispatch(startLogin())
   return new Promise((resolve, reject) => (
     Meteor.loginWithPassword(email, password, (err, res) => {
       if (err) {
@@ -92,6 +98,7 @@ export const logout = () => (dispatch, getState, Meteor) => (
     })
     Meteor.logout((err, res) => {
       if (err) return reject(err)
+      dispatch(logoutDone())
       resolve(res)
     })
   })
@@ -116,23 +123,21 @@ export function setLoginPassword(password) {
   }
 }
 
-export const logoutRequest = () => (dispatch, getState, asteroid) => {
+export const logoutRequest = () => (dispatch, getState, Meteor) => {
   dispatch({
-    type: LOGOUT_REQUEST
+    type: LOGOUT_REQUEST,
   })
-  asteroid.logout()
+  Meteor.logout()
 }
 
-export const clearLogoutRequest = () => {
-  return {
-    type: CLEAR_LOGOUT_REQUEST
-  }
-}
+export const clearLogoutRequest = () => ({
+  type: CLEAR_LOGOUT_REQUEST,
+})
 const initialState = Map({
   email: '',
   password: '',
   loading: false,
-  error: false,
+  error: null,
   success: false,
   logoutRequest: false,
   isMeteorUserFetched: false,
@@ -146,28 +151,34 @@ export default (state = initialState, action) => {
       return state.set('logoutRequest', false)
     case LOGOUT_REQUEST:
       return state.set('logoutRequest', true)
+    case LOGOUT_DONE:
+      return state.set('error', null)
+        .set('success', false)
+        .set('loading', false)
+        .set('email', '')
+        .set('password', '')
     case SET_LOGIN_EMAIL:
-      const email = action.payload.email;
-      return state.set('email', email);
+      const email = action.payload.email
+      return state.set('email', email)
     case SET_LOGIN_PASSWORD:
-      const password = action.payload.password;
-      return state.set('password', password);
+      const password = action.payload.password
+      return state.set('password', password)
     case START_LOGIN:
       return state.set('loading', true)
         .set('success', false)
-        .set('error', false)
+        .set('error', null)
         .set('isMeteorUserFetched', false)
     case LOGIN_SUCCESS:
       return state.merge({
         loading: false,
-        error: false,
+        error: null,
         success: true,
       })
     case LOGIN_ERROR:
-      return state.withMutations(map => {
+      return state.withMutations((map) => {
         map.set('loading', false).set('error', action.payload.error).set('success', false)
       })
     default:
-      return state;
+      return state
   }
 }

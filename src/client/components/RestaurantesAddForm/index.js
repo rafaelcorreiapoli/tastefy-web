@@ -20,20 +20,6 @@ const schema = Joi.object({
 
 const validate = values => validator(values, schema)
 
-const normalizeNumber = (value, previous) => {
-  console.log(value.slice(-1))
-  if (value.slice(-1) === '.') {
-    console.log("reutrning " + value)
-    return value
-  }
-
-  if (isNaN(Number(value))) {
-    return previous
-  }
-
-  return Number(value)
-}
-
 class RestaurantesAddForm extends React.Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
@@ -71,6 +57,7 @@ class RestaurantesAddForm extends React.Component {
             floatingLabelText="Latitude"
             component={TextField}
             name="lat"
+            normalize={n => Number(n)}
             fullWidth
             type="number"
           />
@@ -79,6 +66,7 @@ class RestaurantesAddForm extends React.Component {
             component={TextField}
             type="number"
             name="lng"
+            normalize={n => Number(n)}
             fullWidth
           />
           <Field

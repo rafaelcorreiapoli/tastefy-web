@@ -1,7 +1,10 @@
 const styles = {
   container: {
-    padding: 10,
-    display: 'flex',
+    paddingLeft: 60,
+    paddingRight: 60,
+    paddingBottom: 60,
+    paddingTop: 20,
+    display: 'inline-flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
@@ -24,4 +27,4 @@ const styles = {
   },
 }
 
-export default styles;
+export default styles

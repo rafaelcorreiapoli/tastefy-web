@@ -40,7 +40,10 @@ export default class RestauranteCupons extends Component {
           open={qrCodeDialogOpen}
           onRequestClose={closeQrCodeDialog}
         >
-          <QRCode value={selectedToken} size={400} height={400} />,
+          {
+            selectedToken &&
+            <QRCode value={selectedToken} size={400} height={400} />
+          }
         </Dialog>
         <CuponsList
           cupons={cupons}

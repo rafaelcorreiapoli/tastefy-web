@@ -29,8 +29,6 @@ export const validar = new ValidatedMethod({
     check(token, String)
   },
   run({ token }) {
-    Meteor._sleepForMs(2500)
-
     const voucher = Vouchers.findOne({
       token,
       utilizado: false,

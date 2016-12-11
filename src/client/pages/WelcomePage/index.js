@@ -1,16 +1,22 @@
 import React, { PropTypes } from 'react'
-import Calendar from '@components/Calendar'
-import Webcam from 'react-webcam';
-import MontarQuestionario from '@components/MontarQuestionario'
 import { Grid, Row, Col } from 'react-flexbox-grid'
+import { Meteor } from 'meteor/meteor'
+import { composeWithTracker } from 'react-komposer'
 
 class WelcomePage extends React.Component {
+  static propTypes = {
+    nomeCompleto: PropTypes.string,
+  }
+
   render() {
+    const {
+      nomeCompleto,
+    } = this.props
     return (
       <Grid>
         <Row>
           <Col xs={12}>
-            <MontarQuestionario />
+            <h1>Bem-vindo, {nomeCompleto}</h1>
           </Col>
         </Row>
       </Grid>
@@ -18,4 +24,12 @@ class WelcomePage extends React.Component {
   }
 }
 
-export default WelcomePage;
+const compose = (props, onData) => {
+  const user = Meteor.user()
+  if (user) {
+    onData(null, {
+      nomeCompleto: user.profile && user.profile.nomeCompleto,
+    })
+  }
+}
+export default composeWithTracker(compose)(WelcomePage)

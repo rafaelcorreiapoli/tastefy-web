@@ -6,6 +6,13 @@ import CuponsList from '@components/CuponsList'
 import QRCode from 'qrcode.react'
 import Dialog from 'material-ui/Dialog'
 
+const styles = {
+  dialog: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+}
 export default class RestauranteCupons extends Component {
 
   static defaultProps = {}
@@ -35,15 +42,18 @@ export default class RestauranteCupons extends Component {
     return (
       <div>
         <Dialog
-          title="Dialog With Actions"
+          title="Exibir QRCode"
           modal={false}
           open={qrCodeDialogOpen}
           onRequestClose={closeQrCodeDialog}
         >
-          {
-            selectedToken &&
-            <QRCode value={selectedToken} size={400} height={400} />
-          }
+          <div style={styles.dialog}>
+            {
+              selectedToken &&
+              <QRCode value={selectedToken} size={400} height={400} />
+            }
+          </div>
+
         </Dialog>
         <CuponsList
           cupons={cupons}

@@ -5,7 +5,10 @@ import React, {
 import PromocoesAdd from '@containers/PromocoesAdd'
 import Panel from '@components/Panel'
 import { Add } from '@resources/icons'
-export default class PromocoesAddPage extends Component {
+import { PRIMARY_COLOR } from '@resources/colors'
+import withLinks from '@hocs/withLinks'
+
+class PromocoesAddPage extends Component {
 
   static defaultProps = {}
 
@@ -13,6 +16,7 @@ export default class PromocoesAddPage extends Component {
     params: PropTypes.shape({
       restauranteId: PropTypes.string,
     }),
+    go: PropTypes.func,
   }
 
   constructor(props) {
@@ -21,13 +25,35 @@ export default class PromocoesAddPage extends Component {
   }
 
   render() {
+    const {
+      params: {
+        restauranteId,
+      },
+      go,
+    } = this.props
+
     return (
-      <Panel title="Adicionar Promoção" icon={<Add />}>
-        <PromocoesAdd
-          restauranteId={this.props.params.restauranteId}
-        />
-      </Panel>
+      <div>
+        <p>
+          <span
+            style={{
+              color: PRIMARY_COLOR,
+            }}
+            onTouchTap={() => go(`/restaurantes/${restauranteId}/`)}
+          >
+            Dashboard
+          </span>{' '}
+          &gt; Promoções
+        </p>
+
+        <Panel title="Adicionar Promoção" icon={<Add />}>
+          <PromocoesAdd
+            restauranteId={restauranteId}
+          />
+        </Panel>
+      </div>
     )
   }
-
 }
+
+export default withLinks(PromocoesAddPage)

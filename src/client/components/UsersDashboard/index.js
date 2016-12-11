@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
-import FilterDepartamentos from '@components/FilterDepartamentos'
-import SortDepartamentos from '@components/SortDepartamentos'
+import FilterUsers from '@components/FilterUsers'
+import SortUsers from '@components/SortUsers'
 import UserCard from '@components/UserCard'
 import { UsersIcon } from '@resources/icons'
 import DashboardUI from '@components/DashboardUI'
@@ -46,7 +46,7 @@ class UsersDashboard extends React.Component {
 
   _renderFilter(filter, setFilter) {
     return (
-      <FilterDepartamentos
+      <FilterUsers
         value={filter}
         onChange={setFilter}
       />
@@ -55,7 +55,7 @@ class UsersDashboard extends React.Component {
 
   _renderSort(sort, setSort) {
     return (
-      <SortDepartamentos
+      <SortUsers
         value={sort}
         onChange={setSort}
       />

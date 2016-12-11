@@ -6,6 +6,7 @@ import InputWrapper from '@components/ReduxFormWidgets/InputWrapper'
 import validator from '@utils/validator'
 import {
   TextField,
+  Checkbox,
 } from 'redux-form-material-ui'
 import MontarQuestionario from '@components/MontarQuestionario'
 import Divider from 'material-ui/Divider'
@@ -14,6 +15,7 @@ import PerguntasField from '@components/PerguntasField'
 const schema = Joi.object({
   nome: Joi.string().required(),
   tempoMedio: Joi.number().required(),
+  ativo: Joi.boolean().required(),
 })
 
 const validate = values => validator(values, schema)
@@ -47,6 +49,13 @@ class QuestionariosAddForm extends React.Component {
             name="tempoMedio"
             type="number"
             fullWidth
+          />
+          <Field
+            label="Ativo"
+            component={Checkbox}
+            name="ativo"
+            style={{ marginTop: 20, marginBottom: 20 }}
+            normalize={v => Boolean(v)}
           />
           <Divider style={{ marginLeft: -20, marginRight: -20, marginTop: 30, marginBottom: 30 }} />
           <h3>Configurar Perguntas</h3>

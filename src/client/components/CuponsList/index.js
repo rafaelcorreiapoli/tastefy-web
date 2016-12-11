@@ -49,8 +49,8 @@ export default class CuponsList extends Component {
             >
               <QRCode
                 value={cupom.token}
-                size={50}
-                height={50}
+                size={36}
+                height={36}
               />
             </FlatButton>,
             moment(cupom.geradoEm).format('DD/MM/YYYY HH:mm:ss'),

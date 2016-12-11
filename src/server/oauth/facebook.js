@@ -19,6 +19,7 @@ const getIdentity = (accessToken, fields) => {
   }
 }
 
+const generateAvatarUrl = id => `http://graph.facebook.com/${id}/picture?type=square`
 
 const registerHandler = () => {
   Accounts.registerLoginHandler('facebook', (params) => {
@@ -31,7 +32,7 @@ const registerHandler = () => {
 
     // The fields we care about (same as Meteor's)
     const whitelisted = ['id', 'email', 'name', 'first_name',
-     'last_name', 'link', 'gender', 'locale', 'age_range']
+      'last_name', 'link', 'gender', 'locale', 'age_range']
 
     // Get our user's identifying information. This also checks if the accessToken
     // is valid. If not it will error out.
@@ -67,7 +68,10 @@ const registerHandler = () => {
         services: {
           facebook: fields,
         },
-        profile: { name: identity.name },
+        profile: {
+          nomeCompleto: identity.name,
+          foto: generateAvatarUrl(identity.id),
+        },
         emails: [{
           address: identity.email,
           verified: true,

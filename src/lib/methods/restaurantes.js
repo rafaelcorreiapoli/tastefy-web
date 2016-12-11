@@ -6,7 +6,6 @@ export const insert = new ValidatedMethod({
   name: 'Restaurantes.methods.insert',
   validate: RestauranteSchema.validator(),
   run(data) {
-    Meteor.isServer && Meteor._sleepForMs(1000)
     return Restaurantes.insert(data)
   },
 })

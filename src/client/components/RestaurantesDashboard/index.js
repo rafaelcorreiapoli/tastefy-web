@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
-import FilterDepartamentos from '@components/FilterDepartamentos'
-import SortDepartamentos from '@components/SortDepartamentos'
+import FilterRestaurantes from '@components/FilterRestaurantes'
+import SortRestaurantes from '@components/SortRestaurantes'
 import RestauranteCard from '@components/RestauranteCard'
 import { RestaurantesIcon } from '@resources/icons'
 import DashboardUI from '@components/DashboardUI'
@@ -19,6 +19,7 @@ class RestaurantesDashboard extends React.Component {
     sort: PropTypes.string,
     loading: PropTypes.bool,
     filter: PropTypes.object,
+    go: PropTypes.func,
   }
 
   constructor(props) {
@@ -48,18 +49,26 @@ class RestaurantesDashboard extends React.Component {
     )
   }
 
-  _renderFilter(filter, setFilter) {
+  _renderFilter() {
+    const {
+      filter,
+      setFilter,
+    } = this.props
     return (
-      <FilterDepartamentos
+      <FilterRestaurantes
         value={filter}
         onChange={setFilter}
       />
     )
   }
 
-  _renderSort(sort, setSort) {
+  _renderSort() {
+    const {
+      sort,
+      setSort,
+    } = this.props
     return (
-      <SortDepartamentos
+      <SortRestaurantes
         value={sort}
         onChange={setSort}
       />

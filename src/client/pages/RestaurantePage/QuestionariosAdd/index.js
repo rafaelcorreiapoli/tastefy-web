@@ -5,8 +5,10 @@ import React, {
 import QuestionariosAdd from '@containers/QuestionariosAdd'
 import Panel from '@components/Panel'
 import { Add } from '@resources/icons'
+import withLinks from '@hocs/withLinks'
+import { PRIMARY_COLOR } from '@resources/colors'
 
-export default class QuestionariosAddPage extends Component {
+class QuestionariosAddPage extends Component {
 
   static defaultProps = {}
 
@@ -14,6 +16,7 @@ export default class QuestionariosAddPage extends Component {
     params: PropTypes.shape({
       restauranteId: PropTypes.string,
     }),
+    go: PropTypes.func,
   }
 
   constructor(props) {
@@ -22,13 +25,35 @@ export default class QuestionariosAddPage extends Component {
   }
 
   render() {
+    const {
+      params: {
+        restauranteId,
+      },
+      go,
+    } = this.props
+
     return (
-      <Panel title="Adicionar Questionário" icon={<Add />} >
-        <QuestionariosAdd
-          restauranteId={this.props.params.restauranteId}
-        />
-      </Panel>
+      <div>
+        <p>
+          <span
+            style={{
+              color: PRIMARY_COLOR,
+            }}
+            onTouchTap={() => go(`/restaurantes/${restauranteId}/`)}
+          >
+            Dashboard
+          </span>{' '}
+          &gt; Adicionar Questionário
+        </p>
+        <Panel title="Adicionar Questionário" icon={<Add />} >
+          <QuestionariosAdd
+            restauranteId={this.props.params.restauranteId}
+          />
+        </Panel>
+      </div>
     )
   }
 
 }
+
+export default withLinks(QuestionariosAddPage)

@@ -6,28 +6,33 @@ import { Match, check } from 'meteor/check'
 
 export const invite = new ValidatedMethod({
   name: 'Users.methods.invite',
-  validate({ email, restauranteId, role }) {
+  validate({ email, restauranteId, role, password, nomeCompleto, foto }) {
     check(email, String)
+    check(password, String)
+    check(nomeCompleto, String)
+    check(foto, String)
     check(restauranteId, Match.Optional(String))
     check(role, String)
   },
-  run({ email, restauranteId, role, nomeCompleto }) {
+  run({ email, restauranteId, role, password, nomeCompleto, foto }) {
     if (!this.isSimulation) {
       this.unblock()
-      const chance = new Chance()
-      const password = chance.bb_pin()
+      // const chance = new Chance()
+      // const password = chance.bb_pin()
+
       const options = {
         email,
         password,
         restauranteId,
         profile: {
           nomeCompleto,
+          foto,
         },
       }
 
       try {
         const userId = Accounts.createUser(options)
-        Accounts.sendEnrollmentEmail(userId, email)
+        // Accounts.sendEnrollmentEmail(userId, email)
         Roles.addUsersToRoles(userId, role)
         return true
       } catch (e) {

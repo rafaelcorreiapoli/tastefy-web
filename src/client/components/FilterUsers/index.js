@@ -15,7 +15,7 @@ class FilterFuncionarios extends React.Component {
   render() {
     return (
       <div>
-        <h4>Salário</h4>
+        {/* <h4>Salário</h4>
         <Slider
           range
           value={[10, 20]}
@@ -35,7 +35,7 @@ class FilterFuncionarios extends React.Component {
           component={SelectField}
           floatingLabelText="Setor"
           fullWidth
-        />
+        /> */}
       </div>
     )
   }

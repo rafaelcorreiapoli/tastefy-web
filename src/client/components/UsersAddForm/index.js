@@ -25,6 +25,8 @@ const schema = Joi.object({
     is: ROLES_GESTOR,
     then: Joi.required(),
   }),
+  foto: Joi.string().required(),
+  password: Joi.string().required(),
 })
 
 const validate = values => validator(values, schema)
@@ -58,6 +60,13 @@ class UsersAddForm extends React.Component {
             fullWidth
           />
           <Field
+            floatingLabelText="Senha"
+            component={TextField}
+            type="password"
+            name="password"
+            fullWidth
+          />
+          <Field
             floatingLabelText="Nome Completo"
             component={TextField}
             name="nomeCompleto"
@@ -88,6 +97,12 @@ class UsersAddForm extends React.Component {
               }
             </Field>
           }
+          <Field
+            floatingLabelText="Foto"
+            component={TextField}
+            name="foto"
+            fullWidth
+          />
         </InputWrapper>
         <InputWrapper>
           <RaisedButton

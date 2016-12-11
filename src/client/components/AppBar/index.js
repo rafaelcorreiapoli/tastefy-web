@@ -41,7 +41,7 @@ class AppBar extends React.Component {
               primaryText="Profile"
               onClick={onClickProfileLink}
             /> */}
-            <Divider />
+
             <MenuItem
               leftIcon={<Add />}
               primaryText="Adicionar restaurante"
@@ -73,6 +73,7 @@ class AppBar extends React.Component {
               onClick={onClickHelpLink}
             />
             */}
+            <Divider />
             <MenuItem
               leftIcon={<Logout />}
               primaryText="Logout"

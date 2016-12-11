@@ -8,6 +8,7 @@ import ProdutosAdd from '@containers/ProdutosAdd'
 import { Add } from '@resources/icons'
 import withLinks from '@hocs/withLinks'
 import FlatButton from 'material-ui/FlatButton'
+import { PRIMARY_COLOR } from '@resources/colors'
 
 class ProdutosAddPage extends Component {
 
@@ -37,6 +38,9 @@ class ProdutosAddPage extends Component {
       <div>
         <p>
           <a
+            style={{
+              color: PRIMARY_COLOR,
+            }}
             href="#" onTouchTap={() => go(`/restaurantes/${restauranteId}/`)}
           >
             Dashboard

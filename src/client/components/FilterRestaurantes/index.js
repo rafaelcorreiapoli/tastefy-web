@@ -62,7 +62,7 @@ class FilterDepartamentos extends React.Component {
     } = this.state
     return (
       <div>
-        <h4>Número de funcionários</h4>
+        {/* <h4>Número de funcionários</h4>
         <Slider
           range
           value={funcionariosCount}
@@ -79,12 +79,12 @@ class FilterDepartamentos extends React.Component {
           max={maxSetoresCount}
           onChange={v => this.handleChange('setoresCount', v)}
           onAfterChange={this.handleAfterChange}
-        />
+        /> */}
       </div>
     )
   }
 }
 
 export default reduxForm({
-  form: 'filterDepartamentos'
+  form: 'filterDepartamentos',
 })(FilterDepartamentos)

@@ -15,16 +15,15 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onSubmit(values) {
-    console.log(values)
     const questionario = {
+      ativo: values.ativo,
       nome: values.nome,
       tempoMedio: Number(values.tempoMedio),
       restauranteId: ownProps.restauranteId,
     }
 
     const perguntas = values.perguntas
-    console.log(questionario, perguntas)
-    
+
     dispatch(call(METHOD, {
       questionario,
       perguntas,

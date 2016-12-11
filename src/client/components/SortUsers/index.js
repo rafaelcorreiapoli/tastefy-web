@@ -18,12 +18,12 @@ class SortForm extends React.Component {
         >
           <MenuItem value="nome.asc" primaryText="Nome A-Z" />
           <MenuItem value="nome.desc" primaryText="Nome Z-A" />
-          <MenuItem value="salario.asc" primaryText="Menor salário" />
+          {/* <MenuItem value="salario.asc" primaryText="Menor salário" />
           <MenuItem value="salario.desc" primaryText="Maior salário" />
           <MenuItem value="pontos.asc" primaryText="Menor número de pontos" />
           <MenuItem value="pontos.desc" primaryText="Maior número de pontos" />
           <MenuItem value="faltas.asc" primaryText="Menor número de faltas" />
-          <MenuItem value="faltas.desc" primaryText="Maior número de faltas" />
+          <MenuItem value="faltas.desc" primaryText="Maior número de faltas" /> */}
         </Field>
       </div>
     )
@@ -31,5 +31,5 @@ class SortForm extends React.Component {
 }
 
 export default reduxForm({
-  form: 'sortFuncionarios'
+  form: 'sortFuncionarios',
 })(SortForm)

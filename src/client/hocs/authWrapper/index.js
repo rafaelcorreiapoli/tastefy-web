@@ -45,7 +45,7 @@ export default (ComposedComponent) => {
       }
     }
 
-    componentDidMount() {
+    componentWillMount() {
       this._checkAuthenticated(this.props)
     }
     constructor(props) {

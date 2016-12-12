@@ -64,7 +64,7 @@ class DeleteModal extends Component {
           loading ?
             <Loading />
           :
-            <span>{msg}</span>
+            <h3 style={{ marginBottom: 0, textAlign: 'center' }}>{msg}</h3>
         }
       </Dialog>
     )

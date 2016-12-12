@@ -24,15 +24,14 @@ export default (ComposedComponent, { searchId, searchFn }) => {
       registerSearch: PropTypes.func,
     }
 
-    constructor(props) {
-      super(props)
-      props.registerSearch()
-    }
-
     render() {
       return (
         <ComposedComponent {...this.props} />
       )
+    }
+
+    componentWillMount() {
+      this.props.registerSearch()
     }
   }
 

@@ -52,8 +52,8 @@ export default class GenericTable extends Component {
                 <GenericTableRow
                   key={i}
                   data={rowData}
-                  onDelete={() => onDelete(row._id)}
-                  onEdit={() => onEdit(row._id)}
+                  onDelete={() => onDelete(row._id, row)}
+                  onEdit={() => onEdit(row._id, row)}
                   renderActions={renderActions}
                 />
               )

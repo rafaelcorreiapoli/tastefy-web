@@ -26,6 +26,7 @@ export default class RestaurantePromocoes extends Component {
       onEdit,
       deleteEntity,
       askToDelete,
+      go,
     } = this.props
 
     return (
@@ -37,7 +38,7 @@ export default class RestaurantePromocoes extends Component {
         <PromocoesList
           promocoes={promocoes}
           onDelete={promocaoId => askToDelete('restaurantePromocoes', promocaoId, 'Deseja deletar?')}
-          onEdit={promocaoId => console.log('edit!')}
+          onEdit={(promocaoId, promocao) => go(`/restaurantes/${promocao.restauranteId}/promocoes/${promocaoId}/edit`)}
         />
       </div>
     )

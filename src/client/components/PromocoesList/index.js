@@ -42,8 +42,8 @@ export default class PromocoesList extends Component {
           moment(promocao.validoAte).format('DD/MM/YYYY'),
         ])}
         renderActions
-        onDelete={id => onDelete(id)}
-        onEdit={id => onEdit(id)}
+        onDelete={onDelete}
+        onEdit={onEdit}
       />
     )
   }

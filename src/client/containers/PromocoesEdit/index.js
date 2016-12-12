@@ -12,7 +12,7 @@ const METHOD = 'Promocoes.methods.update'
 
 const mapStateToProps = (state, { promocao }) => ({
   values: state.form.updatePromocao && state.form.updatePromocao.values,
-  updatePromocaoLoading: getMethodState(state, METHOD).loading,
+  loading: getMethodState(state, METHOD).loading,
   updatePromocaoSuccess: getMethodState(state, METHOD).success,
   updatePromocaoError: getMethodState(state, METHOD).error,
   initialValues: {
@@ -22,6 +22,8 @@ const mapStateToProps = (state, { promocao }) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onSubmit(values) {
+    delete values._id
+
     const submitValues = {
       _id: ownProps.promocaoId,
       doc: {

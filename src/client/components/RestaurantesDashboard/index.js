@@ -46,7 +46,7 @@ class RestaurantesDashboard extends React.Component {
           {...restaurante}
           highlight={searchText}
           onClickRestaurante={() => go(`/restaurantes/${restaurante._id}`)}
-          onClickDelete={() => askToDelete(deleteEntityId, restaurante._id, `Deseja deletar ${restaurante.nome}`)}
+          onClickDelete={() => askToDelete(deleteEntityId, restaurante._id, `Deseja deletar ${restaurante.nome}?`)}
         />
       </div>
 

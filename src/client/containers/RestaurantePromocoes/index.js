@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import Alert from 'react-s-alert'
 import { closeModal, openModal } from '@ducks/deleteEntity'
 import { call } from '@ducks/methods'
+import withLinks from '@hocs/withLinks'
 
 const compose = ({ restauranteId }, onData) => {
   const handler = Meteor.subscribe('promocoes.porRestaurante', {
@@ -41,4 +42,4 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const connected = connect(null, mapDispatchToProps)(RestaurantePromocoes)
-export default composeWithTracker(compose, Loading)(connected)
+export default withLinks(composeWithTracker(compose, Loading)(connected))

@@ -5,7 +5,7 @@ import { RaisedButton, MenuItem } from 'material-ui'
 import InputWrapper from '@components/ReduxFormWidgets/InputWrapper'
 import validator from '@utils/validator'
 import SelecionarProdutoField from '@components/ReduxFormWidgets/SelecionarProdutoField'
-
+import MDSpinner from 'react-md-spinner'
 
 import {
   TextField,
@@ -41,6 +41,7 @@ class PromocoesAddForm extends React.Component {
       invalid,
       optionsProdutos,
       buttonLabel,
+      loading,
     } = this.props
 
     return (
@@ -94,9 +95,13 @@ class PromocoesAddForm extends React.Component {
         </InputWrapper>
         <InputWrapper>
           <RaisedButton
-            label={buttonLabel || 'Criar'}
-            disabled={invalid}
+            icon={loading && <MDSpinner singleColor="white" size={16} style={{ marginRight: 10 }} />}
+            label={
+                buttonLabel || 'Criar'
+            }
+            disabled={invalid || loading}
             primary
+            style={{ width: 200 }}
             type="submit"
           />
         </InputWrapper>

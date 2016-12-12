@@ -23,7 +23,7 @@ const schema = Joi.object({
   produtosId: Joi.array().items(Joi.string()),
 })
 
-const validate = values => validator(values, schema)
+export const validate = values => validator(values, schema)
 
 class PromocoesAddForm extends React.Component {
   static propTypes = {
@@ -111,8 +111,4 @@ class PromocoesAddForm extends React.Component {
 }
 
 
-export default reduxForm({
-  form: 'insertPromocao',
-  destroyOnUnmount: false,
-  validate,
-})(PromocoesAddForm)
+export default PromocoesAddForm

@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
-import PromocoesAddForm from '@components/PromocoesAddForm'
+import PromocoesAddForm, { validate } from '@components/PromocoesAddForm'
 import { call, getMethodState } from '@ducks/methods'
 import Alert from 'react-s-alert'
-import { reset } from 'redux-form'
+import { reset, reduxForm } from 'redux-form'
 import { composeWithTracker } from 'react-komposer'
 import { Meteor } from 'meteor/meteor'
 import Produtos from '@collections/produtos'
@@ -59,9 +59,15 @@ const compose = ({ restauranteId }, onData) => {
   }
 }
 
+const PromocoesAddReduxForm = reduxForm({
+  form: 'insertPromocao',
+  destroyOnUnmount: false,
+  validate,
+})(PromocoesAddForm)
+
 const PromocaoAdd = connect(
   mapStateToProps,
   mapDispatchToProps
-)(PromocoesAddForm)
+)(PromocoesAddReduxForm)
 
 export default composeWithTracker(compose)(PromocaoAdd)

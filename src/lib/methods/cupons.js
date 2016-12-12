@@ -7,6 +7,15 @@ import Promocoes from '@collections/promocoes'
 import Cupons from '@collections/cupons'
 import { Roles } from 'meteor/alanning:roles'
 
+Meteor.methods({
+  'Cupons.methods.remove': function remove({ _id }) {
+    // if (!Meteor.userId()) throw new Meteor.Error('not-loggedIn')
+    // if (!Roles.userIsInRole(Meteor.userId(), 'admin')) throw new Meteor.Error('not-authorized')
+    return Cupons.remove(_id)
+  },
+})
+
+
 export const insert = new ValidatedMethod({
   name: 'Cupons.methods.insert',
   validate({ restauranteId }) {

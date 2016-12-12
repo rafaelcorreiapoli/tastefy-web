@@ -12,6 +12,7 @@ import uploader from '@ducks/uploader'
 import search from '@ducks/search'
 import dashboard from 'ducks-dashboard'
 import restauranteCupons from '@ducks/restauranteCupons'
+import deleteEntity from '@ducks/deleteEntity'
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   search,
   dashboard,
   restauranteCupons,
+  deleteEntity,
 })
 
 export default rootReducer

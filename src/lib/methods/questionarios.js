@@ -49,3 +49,11 @@ export const setAtivo = new ValidatedMethod({
     })
   },
 })
+
+Meteor.methods({
+  'Questionarios.methods.remove': function remove({ _id }) {
+    // if (!Meteor.userId()) throw new Meteor.Error('not-loggedIn')
+    // if (!Roles.userIsInRole(Meteor.userId(), 'admin')) throw new Meteor.Error('not-authorized')
+    return Questionarios.remove(_id)
+  },
+})

@@ -8,6 +8,7 @@ import SortWrapper from '@components/SortWrapper'
 import Panel from '@components/Panel'
 import MDSpinner from 'react-md-spinner'
 import SearchText from '@components/SearchText'
+import DeleteModal from '@components/DeleteModal'
 
 const styles = {
   paperStyle: {
@@ -127,10 +128,16 @@ class DashboardUI extends React.Component {
       renderSort,
       title,
       titleIcon,
+      deleteEntity,
+      deleteEntityId,
     } = this.props
 
     return (
       <Grid style={{ maxWidth: 1440, width: '100%' }}>
+        <DeleteModal
+          id={deleteEntityId}
+          deleteEntity={deleteEntity}
+        />
         <Row>
           <Col xs={12} md={3}>
             <FilterWrapper>

@@ -3,6 +3,7 @@ import React, {
   PropTypes,
 } from 'react'
 import PromocoesList from '@components/PromocoesList'
+import DeleteModal from '@components/DeleteModal'
 
 export default class RestaurantePromocoes extends Component {
   static defaultProps = {}
@@ -23,17 +24,22 @@ export default class RestaurantePromocoes extends Component {
       promocoes,
       onDelete,
       onEdit,
+      deleteEntity,
+      askToDelete,
     } = this.props
 
     return (
       <div>
+        <DeleteModal
+          id={'restaurantePromocoes'}
+          deleteEntity={deleteEntity}
+        />
         <PromocoesList
           promocoes={promocoes}
-          onDelete={(promocaoId) => console.log('delete!')}
-          onEdit={(promocaoId) => console.log('edit!')}
+          onDelete={promocaoId => askToDelete('restaurantePromocoes', promocaoId, 'Deseja deletar?')}
+          onEdit={promocaoId => console.log('edit!')}
         />
       </div>
     )
   }
-
 }

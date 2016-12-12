@@ -4,7 +4,9 @@ import RestaurantesDashboard from '@containers/RestaurantesDashboard'
 class RestaurantesPage extends React.Component {
   render() {
     return (
-      <RestaurantesDashboard />
+      <RestaurantesDashboard
+        deleteEntityId={'restaurantes'}
+      />
     )
   }
 }

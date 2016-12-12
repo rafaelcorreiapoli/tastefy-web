@@ -5,6 +5,7 @@ import React, {
 import CuponsList from '@components/CuponsList'
 import QRCode from 'qrcode.react'
 import Dialog from 'material-ui/Dialog'
+import DeleteModal from '@components/DeleteModal'
 
 const styles = {
   dialog: {
@@ -37,6 +38,8 @@ export default class RestauranteCupons extends Component {
       selectedToken,
       closeQrCodeDialog,
       selectQrCode,
+      deleteEntity,
+      askToDelete,
     } = this.props
 
     return (
@@ -53,11 +56,14 @@ export default class RestauranteCupons extends Component {
               <QRCode value={selectedToken} size={400} height={400} />
             }
           </div>
-
         </Dialog>
+        <DeleteModal
+          id={'restauranteCupons'}
+          deleteEntity={deleteEntity}
+        />
         <CuponsList
           cupons={cupons}
-          onDelete={questionarioId => console.log('delete!')}
+          onDelete={cupomId => askToDelete('restauranteCupons', cupomId, 'Deseja deletar?')}
           onEdit={questionarioId => console.log('edit!')}
           onClickQRCode={({ token }) => selectQrCode(token)}
         />

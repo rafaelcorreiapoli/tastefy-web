@@ -9,3 +9,11 @@ export const insert = new ValidatedMethod({
     return Produtos.insert(data)
   },
 })
+
+Meteor.methods({
+  'Produtos.methods.remove': function remove({ _id }) {
+    // if (!Meteor.userId()) throw new Meteor.Error('not-loggedIn')
+    // if (!Roles.userIsInRole(Meteor.userId(), 'admin')) throw new Meteor.Error('not-authorized')
+    return Produtos.remove(_id)
+  },
+})

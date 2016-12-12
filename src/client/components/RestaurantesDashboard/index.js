@@ -5,6 +5,7 @@ import RestauranteCard from '@components/RestauranteCard'
 import { RestaurantesIcon } from '@resources/icons'
 import DashboardUI from '@components/DashboardUI'
 
+
 class RestaurantesDashboard extends React.Component {
   static propTypes = {
     searchText: PropTypes.string,
@@ -32,6 +33,8 @@ class RestaurantesDashboard extends React.Component {
     const {
       searchText,
       go,
+      askToDelete,
+      deleteEntityId,
     } = this.props
 
     return (
@@ -43,6 +46,7 @@ class RestaurantesDashboard extends React.Component {
           {...restaurante}
           highlight={searchText}
           onClickRestaurante={() => go(`/restaurantes/${restaurante._id}`)}
+          onClickDelete={() => askToDelete(deleteEntityId, restaurante._id, `Deseja deletar ${restaurante.nome}`)}
         />
       </div>
 

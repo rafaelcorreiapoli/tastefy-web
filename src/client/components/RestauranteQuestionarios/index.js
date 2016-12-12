@@ -3,7 +3,7 @@ import React, {
   PropTypes,
 } from 'react'
 import QuestionariosList from '@components/QuestionariosList'
-
+import DeleteModal from '@components/DeleteModal'
 
 export default class RestauranteQuestionarios extends Component {
 
@@ -21,13 +21,19 @@ export default class RestauranteQuestionarios extends Component {
   render() {
     const {
       questionarios,
+      askToDelete,
+      deleteEntity,
     } = this.props
 
     return (
       <div>
+        <DeleteModal
+          id={'restauranteQuestionarios'}
+          deleteEntity={deleteEntity}
+        />
         <QuestionariosList
           questionarios={questionarios}
-          onDelete={questionarioId => console.log('delete!')}
+          onDelete={questionarioId => askToDelete('restauranteQuestionarios', questionarioId, 'Deseja deletar?')}
           onEdit={questionarioId => console.log('edit!')}
         />
       </div>

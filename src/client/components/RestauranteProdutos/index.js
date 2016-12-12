@@ -4,6 +4,7 @@ import React, {
 } from 'react'
 
 import ProdutosList from '@components/ProdutosList'
+import DeleteModal from '@components/DeleteModal'
 
 export default class RestauranteProdutos extends Component {
 
@@ -21,13 +22,19 @@ export default class RestauranteProdutos extends Component {
   render() {
     const {
       produtos,
+      deleteEntity,
+      askToDelete,
     } = this.props
 
     return (
       <div>
+        <DeleteModal
+          id={'restauranteProdutos'}
+          deleteEntity={deleteEntity}
+        />
         <ProdutosList
           produtos={produtos}
-          onDelete={produtoId => console.log('delete!')}
+          onDelete={produtoId => askToDelete('restauranteProdutos', produtoId, 'Deseja deletar?')}
           onEdit={produtoId => console.log('edit!')}
         />
       </div>

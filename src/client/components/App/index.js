@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
-import Alert from 'react-s-alert';
+import Alert from 'react-s-alert'
+import DeleteModal from '@components/DeleteModal'
 
 class App extends React.Component {
   static displayName = 'App'
@@ -14,6 +15,7 @@ class App extends React.Component {
     return (
       <div>
         {children}
+        <DeleteModal />
         <Alert
           stack={{
             limit: 3,
@@ -26,4 +28,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App

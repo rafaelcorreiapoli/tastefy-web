@@ -31,6 +31,7 @@ class PromocoesAddForm extends React.Component {
     onSubmit: PropTypes.func.isRequired,
     invalid: PropTypes.bool.isRequired,
     optionsProdutos: PropTypes.array,
+    buttonLabel: PropTypes.string,
   }
 
   render() {
@@ -39,6 +40,7 @@ class PromocoesAddForm extends React.Component {
       onSubmit,
       invalid,
       optionsProdutos,
+      buttonLabel,
     } = this.props
 
     return (
@@ -92,7 +94,7 @@ class PromocoesAddForm extends React.Component {
         </InputWrapper>
         <InputWrapper>
           <RaisedButton
-            label={'Criar'}
+            label={buttonLabel || 'Criar'}
             disabled={invalid}
             primary
             type="submit"

@@ -8,6 +8,10 @@ import convertFormObjectToFilterObject, { RANGE } from '@utils/convert_filter_ob
 import Loading from '@components/Loading'
 import Restaurantes from '@collections/restaurantes'
 import withLinks from '@hocs/withLinks'
+import { connect } from 'react-redux'
+import { openModal, closeModal } from '@ducks/deleteEntity'
+import Alert from 'react-s-alert'
+import { call } from '@ducks/methods'
 
 const composer = (props, onData) => {
   const {
@@ -59,6 +63,23 @@ const composer = (props, onData) => {
   }
 }
 
-export default searchHOC(composeWithTracker(composer, Loading)(withLinks(RestaurantesDashboard)), {
+const mapDispatchToProps = dispatch => ({
+  askToDelete(id, entityId, msg) {
+    dispatch(openModal(id, entityId, msg))
+  },
+  deleteEntity(_id, modalId) {
+    dispatch(call('Restaurantes.methods.remove', { _id }))
+    .then((res) => {
+      Alert.success('sucesso')
+      dispatch(closeModal(modalId))
+    })
+    .catch((err) => {
+      Alert.error(err.toString())
+      dispatch(closeModal(modalId))
+    })
+  },
+})
+
+export default searchHOC(composeWithTracker(composer, Loading)(withLinks(connect(null, mapDispatchToProps)(RestaurantesDashboard))), {
   searchId: 'restaurantes',
 })

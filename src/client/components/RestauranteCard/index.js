@@ -5,6 +5,7 @@ import IconButton from 'material-ui/IconButton'
 import Divider from 'material-ui/Divider'
 import { Remove, Edit } from '@resources/icons'
 import Highlighter from 'react-highlight-words'
+import DeleteEntity from '@containers/DeleteEntity'
 
 class RestauranteCard extends React.Component {
   static defaultProps = {
@@ -19,10 +20,12 @@ class RestauranteCard extends React.Component {
   }
   render() {
     const {
+      _id,
       style,
       nome,
       highlight,
       onClickRestaurante,
+      onClickDelete,
     } = this.props
 
     return (
@@ -32,11 +35,11 @@ class RestauranteCard extends React.Component {
             <FlatButton
               onTouchTap={onClickRestaurante}
             >
-            <Highlighter
-              highlightClassName="highlight"
-              searchWords={[highlight]}
-              textToHighlight={nome}
-            />
+              <Highlighter
+                highlightClassName="highlight"
+                searchWords={[highlight]}
+                textToHighlight={nome}
+              />
             </FlatButton>
 
           }
@@ -48,7 +51,20 @@ class RestauranteCard extends React.Component {
         <Divider />
         <CardActions>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <IconButton tooltip="Remover">
+            {/* <DeleteEntity
+              entityId={_id}
+              msg={`Tem certeza que deseja deletar ${nome}?`}
+              method={'Restaurantes.methods.remove'}
+              getErrorMsg={e => `Erro ${e.toString()}`}
+              getSuccessMsg={res => `Successo deletando ${nome}!`}
+              getParams={_id => ({ _id })}
+              renderView={askToDelete => (
+                <IconButton tooltip="Remover" onTouchTap={askToDelete}>
+                  <Remove />
+                </IconButton>
+              )}
+            /> */}
+            <IconButton tooltip="Remover" onTouchTap={onClickDelete}>
               <Remove />
             </IconButton>
             {/* <IconButton tooltip="Histórico">

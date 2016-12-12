@@ -12,6 +12,7 @@ import Loading from '@components/Loading'
 import UsersAddPage from '@pages/UsersAddPage'
 import GuestLayout from '@components/GuestLayout'
 import authWrapper from '@hocs/authWrapper'
+import PromocoesEditPage from '@pages/PromocoesEditPage'
 
 import RestaurantePage, {
   RestauranteDashboard,
@@ -35,6 +36,7 @@ const Routes = () => (
             <Route path="promocoes/add" component={PromocoesAdd} />
             <Route path="questionarios/add" component={QuestionariosAdd} />A
             <Route path="produtos/add" component={ProdutosAdd} />A
+            <Route path="promocoes/:promocaoId/edit" component={PromocoesEditPage} />
           </Route>
         </Route>
         <Route path="usuarios">
